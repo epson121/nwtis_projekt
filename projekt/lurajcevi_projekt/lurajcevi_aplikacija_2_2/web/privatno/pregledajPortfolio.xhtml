@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>#{m.p_portfolio_naslov}</title>
+        <h:outputStylesheet library="css" name="osnovna.css" />
+        <link href="./resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="./resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+    </h:head>
+    <h:body>
+        <h1> #{m.p_portfolio_naslov}</h1>
+        <h:form>
+            Filtriranje po datumu: (Format datuma: dd.MM.yyyy hh.mm.ss) <br/>
+            Datum1:
+            <h:inputText value="#{portfolioPregled.datum1}" class="filter" />
+            <br/>
+            Datum2:
+            <h:inputText value="#{portfolioPregled.datum2}" class="filter" />
+            <br/>
+            <h:commandButton  value="#{m.p_portfolio_dohvati}" action="#{portfolioPregled.dohvatiPodatkeFiltrirano()}" />
+            <br/>
+        <h:panelGrid columns="1" class="pg_glavni" >
+            <h:dataTable id ="meteoPodaci" value="#{portfolioPregled.meteoPodaci}" var="p" 
+                         class="tablica" headerClass="zaglavlje"
+                            rowClasses="neparni,parni">
+                <h:column>
+                    <f:facet name="header">#{m.p_portfolio_zipTrazeni}</f:facet>
+                    <h:outputText value="#{p.zip_trazeni}"/>
+                </h:column>
+                  <h:column>
+                      <f:facet name="header">#{m.p_portfolio_zipVraceni}</f:facet>
+                    <h:outputText value="#{p.zip_vraceni}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{m.p_portfolio_udaljenost}</f:facet>
+                    <h:outputText value="#{p.zracnaUdaljenost}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{m.p_portfolio_grad}</f:facet>
+                    <h:outputText value="#{p.grad}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{m.p_portfolio_temperatura}</f:facet>
+                    <h:outputText value="#{p.temperatura}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{m.p_portfolio_geoDuzina}</f:facet>
+                    <h:outputText value="#{p.geo_duzina}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{m.p_portfolio_geoSirina}</f:facet>
+                    <h:outputText value="#{p.geo_sirina}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{m.p_portfolio_tlak}</f:facet>
+                    <h:outputText value="#{p.tlak}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{m.p_portfolio_vjetar}</f:facet>
+                    <h:outputText value="#{p.vjetar}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{m.p_portfolio_vlaga}</f:facet>
+                    <h:outputText value="#{p.vlaga}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{m.p_portfolio_datum}</f:facet>
+                    <h:outputText value="#{p.datum}"/>
+                </h:column>
+            </h:dataTable>
+            
+        </h:panelGrid>
+            <h:panelGrid columns="2" >
+                <h:commandButton value="#{m.prethodna}" action="#{portfolioPregled.prethodnaStranica}" >
+                    <f:ajax render="meteoPodaci" execute="#{portfolioPregled.prethodnaStranica()}" immediate="true" />
+                    </h:commandButton>
+                <h:commandButton  value="#{m.slijedeca}" action="#{portfolioPregled.slijedecaStranica}" >
+                    <f:ajax render="meteoPodaci" execute="#{portfolioPregled.slijedecaStranica()}" immediate="true" />
+                </h:commandButton>
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+
