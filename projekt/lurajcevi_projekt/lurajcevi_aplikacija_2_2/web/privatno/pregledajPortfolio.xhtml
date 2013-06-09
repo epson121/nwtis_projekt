@@ -67,7 +67,9 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">#{m.p_portfolio_datum}</f:facet>
-                    <h:outputText value="#{p.datum}"/>
+                    <h:outputText value="#{p.datum}">
+                        <f:convertDateTime pattern="dd.MM.yyyy hh:mm:ss"/>
+                    </h:outputText>
                 </h:column>
             </h:dataTable>
             

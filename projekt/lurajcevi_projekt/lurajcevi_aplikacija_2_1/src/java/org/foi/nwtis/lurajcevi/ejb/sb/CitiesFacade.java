@@ -10,6 +10,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import org.foi.nwtis.lurajcevi.ejb.eb.Cities;
+import org.foi.nwtis.lurajcevi.ejb.eb.States;
 
 /**
  * @document CitiesFacade
@@ -28,6 +29,8 @@ public class CitiesFacade extends AbstractFacade<Cities> {
     public CitiesFacade() {
         super(Cities.class);
     }
+    
+   
     
     /**
      * filtrira gradove prema državama
@@ -58,5 +61,5 @@ public class CitiesFacade extends AbstractFacade<Cities> {
                  cb.like(gradovi.<String>get("name"), filterGradova + "%")));
         return em.createQuery(cq).getResultList();
     }
-    
+
 }

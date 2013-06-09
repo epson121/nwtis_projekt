@@ -1,7 +1,6 @@
 
 package org.foi.nwtis.lurajcevi.ejb.sb;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.naming.NamingException;
@@ -10,7 +9,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import org.foi.nwtis.lurajcevi.ejb.eb.LurajceviKorisnici;
 import org.foi.nwtis.lurajcevi.ejb.eb.LurajceviPortfolio;
 import org.foi.nwtis.lurajcevi.ejb.eb.LurajceviZP;
 import org.foi.nwtis.lurajcevi.ejb.eb.ZipCodes;
@@ -59,5 +57,5 @@ public class LurajceviZPFacade extends AbstractFacade<LurajceviZP> {
         else
             return (List<LurajceviZP>) em.createQuery(cq).getResultList();
     }
-
+    
 }

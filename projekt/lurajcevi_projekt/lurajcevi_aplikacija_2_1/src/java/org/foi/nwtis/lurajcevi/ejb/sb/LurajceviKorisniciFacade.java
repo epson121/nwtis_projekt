@@ -68,4 +68,5 @@ public class LurajceviKorisniciFacade extends AbstractFacade<LurajceviKorisnici>
         cq.select(korisnik).where(cb.equal(korisnik.get("ime"), ime));
         return (LurajceviKorisnici) em.createQuery(cq).getResultList().get(0);
     }
+
 }

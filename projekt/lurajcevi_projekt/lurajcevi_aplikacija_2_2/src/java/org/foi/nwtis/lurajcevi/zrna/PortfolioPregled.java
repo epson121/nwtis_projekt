@@ -199,15 +199,10 @@ public class PortfolioPregled implements Serializable {
                 SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy HH.mm.ss");
                 String dat1 = df2.format(df.parse(datum1));
                 String dat2 = df2.format(df.parse(datum2));
-                System.out.println("dat1: " + dat1);
-                System.out.println("dat2: " + dat2);
-                System.out.println("ZIP: " + zc.getZip());
                 listaMeteoPodataka = WSKlijent.dohvatiPodatkeInterval(zc.getZip() + "", dat1, dat2);
                 if (listaMeteoPodataka == null)
                     continue;
-                System.out.println("VELICINA: " + listaMeteoPodataka.size());
                 for (MeteoPodaci mp2 : listaMeteoPodataka){
-                    System.out.println("podatak: " + mp2.getDatum());
                     if (mp2.getZipVraceni() != null && !mp2.getZipVraceni().equals("null")){
                         if (zc.getZip()  != Integer.parseInt(mp2.getZipVraceni())){
                         udaljenost = udaljenostGeoKoordinata(zc.getLatitude(), 

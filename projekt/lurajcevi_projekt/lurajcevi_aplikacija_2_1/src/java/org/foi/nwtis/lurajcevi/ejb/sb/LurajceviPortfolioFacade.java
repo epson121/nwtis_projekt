@@ -13,7 +13,6 @@ import javax.persistence.criteria.Root;
 import org.foi.nwtis.lurajcevi.ejb.eb.LurajceviKorisnici;
 import org.foi.nwtis.lurajcevi.ejb.eb.LurajceviPortfolio;
 
-
 /**
  * @document LurajceviPortfolioFacade
  * @author Luka Rajcevic
@@ -24,7 +23,9 @@ public class LurajceviPortfolioFacade extends AbstractFacade<LurajceviPortfolio>
     private LurajceviKorisniciFacade lurajceviKorisniciFacade;
     @PersistenceContext(unitName = "lurajcevi_aplikacija_2_1PU")
     private EntityManager em;
-
+    
+    
+    
     @Override
     protected EntityManager getEntityManager() {
         return em;
@@ -62,4 +63,22 @@ public class LurajceviPortfolioFacade extends AbstractFacade<LurajceviPortfolio>
         return lp;
     }
     
+    public LurajceviPortfolio dohvatiPortfolioPremaVlasnikuINazivu(String naziv){
+        System.out.println("IME: " + naziv);
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery cq = cb.createQuery();
+        Root<LurajceviPortfolio> podaci = cq.from(LurajceviPortfolio.class);
+        cq.select(podaci);
+        cq.where(cb.equal(podaci.get("naziv"), naziv));
+        System.out.println("Q: " + em.createQuery(cq).getResultList());
+        if (em.createQuery(cq).getResultList() != null)
+            return (LurajceviPortfolio) em.createQuery(cq).getResultList().get(0);
+        else
+            return null;
+    }
+    
+    public String test(){
+        return "ASD2";
+    }
+
 }

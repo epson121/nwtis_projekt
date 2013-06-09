@@ -50,10 +50,10 @@ public class Login implements Serializable {
         if (session.getAttribute("korisnik") != null)
             return "NOT OK";
         if (lurajceviKorisniciFacade.provjeriKorisnika(korisnickoIme, lozinka)){
-                session.setAttribute("korisnik", korisnickoIme);
-        }
-        if (lurajceviKorisniciFacade.provjeriAdministratora(korisnickoIme)){
-            session.setAttribute("admin", true);
+            session.setAttribute("korisnik", korisnickoIme);
+            if (lurajceviKorisniciFacade.provjeriAdministratora(korisnickoIme)){
+                session.setAttribute("admin", "1");
+            }
         }
         return "OK";
     }
@@ -84,6 +84,14 @@ public class Login implements Serializable {
             throw new ValidatorException(message);
         }
     }
+    
+    public String odjava(){
+        if (session.getAttribute("korisnik") != null)
+            session.removeAttribute("korisnik");
+        if (session.getAttribute("admin") != null)
+            session.removeAttribute("admin");
+        return "";
+    }
 
     public String getKorisnickoIme() {
         return korisnickoIme;
@@ -108,6 +116,5 @@ public class Login implements Serializable {
     public void setUspjesno(boolean uspjesno) {
         this.uspjesno = uspjesno;
     }
-    
     
 }

@@ -28,7 +28,7 @@ public class StatesFacade extends AbstractFacade<States> {
         super(States.class);
     }
     
-    /**
+     /**
      * Filtrira drzave prema unesenom nazivu (LIKE operator)
      * @param naziv - proslijeđena vrijednost
      * @return rezultate upita

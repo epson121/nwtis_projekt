@@ -12,4 +12,5 @@
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="jdbc/nwtis_lurajcevi_bp_2" object-type="user" pool-name="derby_net_nwtis_lurajcevi_bp_2_NWTiSPool"/>
     <jdbc-resource enabled="true" jndi-name="nwtis_lurajcevi_bp_2" object-type="user" pool-name="derby_net_nwtis_lurajcevi_bp_2_NWTiSPool"/>
+    <jdbc-resource enabled="true" jndi-name="jdbc/lurajcevi_db_2" object-type="user" pool-name="derby_net_nwtis_lurajcevi_bp_2_NWTiSPool"/>
 </resources>

@@ -75,7 +75,5 @@ public class Portfolio implements Serializable {
         this.portfolioID = portfolioID;
     }
 
-   
-
     
 }

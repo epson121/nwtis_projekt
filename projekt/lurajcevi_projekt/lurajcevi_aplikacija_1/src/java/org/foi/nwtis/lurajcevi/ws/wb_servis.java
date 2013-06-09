@@ -1,12 +1,9 @@
 package org.foi.nwtis.lurajcevi.ws;
 
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
