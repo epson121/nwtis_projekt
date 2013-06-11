@@ -46,7 +46,7 @@ public class SlusacAplikacije implements ServletContextListener {
         System.out.println("Konfiguracija učitana.");
         
         op = new ObradaPoruke(config);
-        //op.start();
+        op.start();
         
     }
 

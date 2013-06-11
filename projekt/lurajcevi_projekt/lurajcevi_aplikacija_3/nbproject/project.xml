@@ -8,11 +8,11 @@
             <web-module-libraries/>
             <web-module-additional-libraries>
                 <library>
-                    <file>${reference.lurajcevi_aplikacija_3_1.dist-ear}</file>
+                    <file>${reference.lurajcevi_aplikacija_3_2.dist-ear}</file>
                     <path-in-war>/</path-in-war>
                 </library>
                 <library>
-                    <file>${reference.lurajcevi_aplikacija_3_2.dist-ear}</file>
+                    <file>${reference.lurajcevi_aplikacija_3_1.dist-ear}</file>
                     <path-in-war>/</path-in-war>
                 </library>
                 <library>

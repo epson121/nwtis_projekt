@@ -55,9 +55,12 @@ public class ObradaPodatakaServerDretva extends Thread{
     int brojNeispravnihKomandi = 0;
     int brojIzvrsenihKomandi = 0;
     
-    public ObradaPodatakaServerDretva(Socket client, Konfiguracija config){
+    long vrijeme;
+    
+    public ObradaPodatakaServerDretva(Socket client, Konfiguracija config, long vrijeme){
         this.client = client;
         this.config = config;
+        this.vrijeme = vrijeme;
     }
     
     @Override
@@ -71,7 +74,7 @@ public class ObradaPodatakaServerDretva extends Thread{
         OutputStream os = null;
         StringBuilder command;
         String username = "";
-        String response = "ERROR. Wrong command or username/password!";
+        String response = "OK 30";
         int character;
         long start, duration = 0;
         try {
@@ -91,13 +94,8 @@ public class ObradaPodatakaServerDretva extends Thread{
                 brojIzvrsenihKomandi++;
                 username = m.group(1);
                 String password = m.group(2);
-                System.out.println("GRUPA 3:" + m.group(3));
-                System.out.println("GRUPA 4:" + m.group(4));
-                System.out.println("GRUPA 5:" + m.group(5));
-                System.out.println("GRUPA 6:" + m.group(6));
                 if (DBConnector.provjeriKorisnika(admin_podaci, username, password)){
                     String instr = m.group(3);
-                    System.out.println("INSTR: " + instr);
                     if (instr.equals("PAUSE;")){
                         if (!SlusacAplikacije.isPaused()){
                             SlusacAplikacije.setPaused(true);
@@ -152,7 +150,8 @@ public class ObradaPodatakaServerDretva extends Thread{
             }
             duration = System.currentTimeMillis() - start;
             DBConnector.unesiUDnevnikSocketServera("lurajcevi_dnevnik_servera", strCommand, response.substring(0, 5), username);
-            //saljiPoruku(config.dajPostavku("primatelj"), config.dajPostavku("predmet"), duration);
+            long difference = System.currentTimeMillis() - vrijeme;
+            saljiPoruku(config.dajPostavku("primatelj"), config.dajPostavku("predmet"), duration, difference);
             os.write(response.getBytes());
             os.flush();
         } 
@@ -203,7 +202,7 @@ public class ObradaPodatakaServerDretva extends Thread{
      * @param session - sesija koja salje poruku
      * @param store  - store koji salje poruku
      */
-     public void saljiPoruku(String to, String subject, long trajanje){
+     public void saljiPoruku(String to, String subject, long trajanje, long difference){
         try {
             Date d = new Date();
             String id = d + "." + d.getTime();
@@ -222,13 +221,14 @@ public class ObradaPodatakaServerDretva extends Thread{
              * stanja, broj primljenih, neispravnih i izvršenih korisničkih komandi).
              * 
              */
-            message.setHeader("Content-Type", "text/html");
+            message.setHeader("Content-Type", "text/plain");
             message.setSentDate(new Date());
             message.setSubject(subject);
             message.setText("Ukupan broj zahtjeva: " + brojPrimljenihKomandi +
                             "\nBroj izvršenih komandi: " + brojIzvrsenihKomandi +
                             "\nBroj neispravnih komandi: " + brojNeispravnihKomandi +
-                            "\nTrajanje obrade: " + trajanje);
+                            "\nTrajanje obrade: " + trajanje +
+                            "\nRazmak između dvije komande: " + difference);
             Transport.send(message);
         } catch (AddressException ex) {
             Logger.getLogger(ObradaPodatakaServerDretva.class.getName()).log(Level.SEVERE, null, ex);

@@ -100,5 +100,27 @@
         </navigation-case>
     </navigation-rule>
     
+    <navigation-rule>
+        <from-view-id>/privatno/emailPanel.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{pregledSvihPoruka.pregledPoruke}</from-action>
+            <from-outcome>OK</from-outcome>
+            <to-view-id>/privatno/pregledPoruke.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{pregledSvihPoruka.pregledPoruke}</from-action>
+            <from-outcome>NOT OK</from-outcome>
+            <to-view-id>/privatno/emailPanel.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{pregledSvihPoruka.pregledPoruke}</from-action>
+            <from-outcome>ERROR</from-outcome>
+            <to-view-id>/privatno/emailPanel.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
     
 </faces-config>

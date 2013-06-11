@@ -34,7 +34,6 @@ public class FilterZahtjeva implements Filter{
                 HttpSession sesija = ((HttpServletRequest)request).getSession();
                 String zahtjev = ((HttpServletRequest) request).getRequestURI();
                 //TODO dodati u bazu
-                System.out.println("FILTER 1");
                 Object korisnik = sesija.getAttribute("korisnik");                
                 if (korisnik == null){
                     HttpServletResponse res = (HttpServletResponse) response;

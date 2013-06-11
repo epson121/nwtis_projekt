@@ -12,22 +12,27 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
+import javax.jms.JMSException;
 import javax.naming.NamingException;
 import javax.servlet.http.HttpSession;
 import org.foi.nwtis.lurajcevi.ejb.eb.Cities;
 import org.foi.nwtis.lurajcevi.ejb.eb.LurajceviPortfolio;
 import org.foi.nwtis.lurajcevi.ejb.eb.States;
 import org.foi.nwtis.lurajcevi.ejb.eb.ZipCodes;
+import org.foi.nwtis.lurajcevi.ejb.jms.ZipJMS;
 import org.foi.nwtis.lurajcevi.ejb.sb.CitiesFacade;
 import org.foi.nwtis.lurajcevi.ejb.sb.LurajceviPortfolioFacade;
 import org.foi.nwtis.lurajcevi.ejb.sb.LurajceviZPFacade;
 import org.foi.nwtis.lurajcevi.ejb.sb.StatesFacade;
 import org.foi.nwtis.lurajcevi.ejb.sb.ZipCodesFacade;
+import org.foi.nwtis.lurajcevi.modeli.JMSPorukaZip;
 import org.foi.nwtis.lurajcevi.slusaci.SlusacAplikacije;
 import org.foi.nwtis.lurajcevi.ws.WSKlijent;
 
@@ -38,6 +43,8 @@ import org.foi.nwtis.lurajcevi.ws.WSKlijent;
 @Named(value = "portfolioKreiranje")
 @SessionScoped
 public class PortfolioKreiranje implements Serializable {
+    @EJB
+    private ZipJMS zipJMS;
     @EJB
     private LurajceviZPFacade lurajceviZPFacade;
     @EJB
@@ -250,7 +257,11 @@ public class PortfolioKreiranje implements Serializable {
             String zip = data[3].trim();
             lurajceviZPFacade.dodajZP(lp, Integer.parseInt(zip));
             if (!aktivniZipKodovi.contains(zip)){
-                //TODO posalji JMS poruku 
+                try {
+                    zipJMS.sendJMSMessageToNWTiS_lurajcevi_2(zip);
+                } catch (JMSException ex) {
+                    Logger.getLogger(PortfolioKreiranje.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
         return "OK";

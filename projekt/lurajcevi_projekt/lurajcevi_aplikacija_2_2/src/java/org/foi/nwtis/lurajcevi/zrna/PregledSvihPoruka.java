@@ -4,6 +4,7 @@
  */
 package org.foi.nwtis.lurajcevi.zrna;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.mail.AuthenticationFailedException;
+import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.FolderClosedException;
 import javax.mail.FolderNotFoundException;
@@ -27,6 +29,7 @@ import javax.mail.StoreClosedException;
 import javax.mail.internet.InternetAddress;
 import org.foi.nwtis.lurajcevi.modeli.Poruka;
 import org.foi.nwtis.lurajcevi.modeli.PrivitakPoruke;
+import org.foi.nwtis.lurajcevi.slusaci.SlusacAplikacije;
 
 /**
  *
@@ -48,7 +51,7 @@ public class PregledSvihPoruka implements Serializable {
     private String porukaID;
     private List<String> popisMapa;
     private String odabranaMapa = "INBOX";
-    private int pocetak = 0, stranicenje, brojPoruka = 0;
+    private int pocetak = 0, stranicenje = 3, brojPoruka = 0;
     private boolean next = false, prev = false;
     private boolean praznaMapa = true;
     
@@ -64,7 +67,9 @@ public class PregledSvihPoruka implements Serializable {
      * Dohvaća potrebne podatke iz drugih beanova
      */
     public PregledSvihPoruka() {
-        //TODO podaci se kupe iz konfiguracije
+        emailPosluzitelj = SlusacAplikacije.config.dajPostavku("emailPosluzitelj");
+        korisnickoIme = SlusacAplikacije.config.dajPostavku("username");
+        lozinka = SlusacAplikacije.config.dajPostavku("password");
         preuzmiPoruke(pocetak, stranicenje);
     }
     
@@ -92,6 +97,38 @@ public class PregledSvihPoruka implements Serializable {
         }
         return "NOT_OK";
     }
+    
+    public String obrisiPoruku(){
+        pocetak = 0;
+        stranicenje = 3;
+        Session session = null;
+        Store store = null;
+        Folder folder = null;
+        Message message = null;
+        Message[] messages = null;
+        try{
+            session = Session.getDefaultInstance(System.getProperties(), null);
+            store = session.getStore("imap");
+            store.connect(emailPosluzitelj, korisnickoIme, lozinka);
+            
+            folder = store.getDefaultFolder();
+            folder = folder.getFolder(odabranaMapa);
+            folder.open(Folder.READ_ONLY);
+            
+            messages = folder.getMessages();
+            for (int messageNumber = 0; messageNumber < messages.length;  messageNumber++) {
+                message = messages[messageNumber];
+                if (message.getHeader("Message-ID")[0].equals(porukaID)){
+                    message.setFlag(Flags.Flag.DELETED, true);
+                    return "";
+                }
+            }
+        } catch (MessagingException me){
+            
+        }
+        return "";
+    }
+    
     /**
      * sluzi za odabir mape i prikupljanje poruka iz pojedine mape
      * @return 

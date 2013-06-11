@@ -19,6 +19,8 @@ public class ObradaPodatakaServer extends Thread{
     
     private ObradaPodatakaServerDretva ops = null;
     private Konfiguracija config = null;
+    public long vrijeme;
+    
     
     public ObradaPodatakaServer(Konfiguracija config){
         this.config = config;
@@ -41,7 +43,8 @@ public class ObradaPodatakaServer extends Thread{
                     Socket client = server.accept();
                     System.out.println("--------------------------------------------");
                     System.out.println("Request has been received. Now responding...");
-                    ops = new ObradaPodatakaServerDretva(client, config);
+                    vrijeme = System.currentTimeMillis();
+                    ops = new ObradaPodatakaServerDretva(client, config, vrijeme);
                     ops.start();
                 } catch(SocketTimeoutException ste){
                     

@@ -30,8 +30,6 @@ public class LurajceviDnevnikZahtjevaFacade extends AbstractFacade<LurajceviDnev
     }
     
     public void dodajZahtjev(String zahtjev, String korisnik) {
-        System.out.println("ZAH: " + zahtjev);
-        System.out.println("KOR: " + korisnik);
         LurajceviDnevnikZahtjeva ldz = new LurajceviDnevnikZahtjeva();
         ldz.setZahtjev(zahtjev);
         ldz.setKorisnik(korisnik);

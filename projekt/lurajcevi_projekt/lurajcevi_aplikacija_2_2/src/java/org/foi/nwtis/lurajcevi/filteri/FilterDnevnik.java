@@ -38,7 +38,6 @@ public class FilterDnevnik implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
          if (request instanceof HttpServletRequest){
-            System.out.println("FILTER 2");
             HttpServletRequest req = (HttpServletRequest) request;
             HttpSession sesija = ((HttpServletRequest)request).getSession();
             String zahtjev = ((HttpServletRequest) request).getRequestURI();

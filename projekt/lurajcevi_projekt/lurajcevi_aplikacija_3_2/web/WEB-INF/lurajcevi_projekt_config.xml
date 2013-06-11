@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>NWTIS lurajcevi</comment>
+<entry key="interval">120</entry>
+<entry key="port">20000</entry>
+<entry key="server_ip">localhost</entry>
+<entry key="emailPosluzitelj">localhost</entry>
+<entry key="emailPort">143</entry>
+<entry key="username">projekt@nwtis.nastava.foi.hr</entry>
+<entry key="password">123456</entry>
+<entry key="trazeniPredmet">nwtis</entry>
+<entry key="nwtisFolder">nwtis</entry>
+<entry key="ne_nwtisFolder">ne_nwtis</entry>
+<entry key="min_zipovi">3</entry>
+<entry key="max_zipovi">10</entry>
+<entry key="serijalizacija_datoteka_mail">serijalizacija_mail.dat</entry>
+<entry key="serijalizacija_datoteka_zip">serijalizacija_zip.dat</entry>
+</properties>

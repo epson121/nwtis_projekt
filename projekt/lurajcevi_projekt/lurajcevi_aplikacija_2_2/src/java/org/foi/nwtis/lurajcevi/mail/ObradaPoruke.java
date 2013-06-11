@@ -2,8 +2,12 @@
 package org.foi.nwtis.lurajcevi.mail;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.jms.JMSException;
 import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.Message;
@@ -13,15 +17,19 @@ import javax.mail.NoSuchProviderException;
 import javax.mail.Part;
 import javax.mail.Session;
 import javax.mail.Store;
+import org.foi.nwtis.lurajcevi.ejb.jms.MailJMS;
 import org.foi.nwtis.lurajcevi.konfiguracije.Konfiguracija;
 
 /**
  * @document ObradaPoruke
  * @author Luka Rajcevic
  */
+@Stateless
 public class ObradaPoruke extends Thread {
-    
-    
+
+    @EJB
+    private MailJMS mailJMS;
+
     private Konfiguracija config;
     
     private String emailPosluzitelj;
@@ -35,6 +43,9 @@ public class ObradaPoruke extends Thread {
     private int brojProcitanihPoruka = 0;
     private int brojNwtisPoruka = 0;
     private int interval;
+
+    public ObradaPoruke() {
+    }
 
     public ObradaPoruke(Konfiguracija config) {
         this.config = config;
@@ -80,13 +91,14 @@ public class ObradaPoruke extends Thread {
                     folder.open(Folder.READ_WRITE);
                     messages = folder.getMessages();
                     brojProcitanihPoruka = messages.length;
+                    System.out.println("BROJ PROCITANIH PORUKA: " + brojProcitanihPoruka);
                     for (int messageNumber = 0; messageNumber < messages.length; messageNumber++) {
                         
                         message = messages[messageNumber];
                         messagecontentObject = message.getContent();
-
+                        
                         if (message.getSubject().startsWith(trazeniPredmet)){
-                            
+                            System.out.println("Trazena poruka.");
                             contentType = message.getContentType();
                             
                             if (contentType.startsWith("text/plain") || contentType.startsWith("TEXT/PLAIN")){
@@ -103,6 +115,7 @@ public class ObradaPoruke extends Thread {
                             }
                            
                         } else {
+                            System.out.println("Nevaljana poruka");
                             Folder f = store.getFolder(ne_nwtisFolder);
                             if (!f.exists()){ 
                                 f.create(Folder.HOLDS_MESSAGES);
@@ -115,9 +128,11 @@ public class ObradaPoruke extends Thread {
                         }
                     }  
                     duration = System.currentTimeMillis() - start;
-                    //TODO poslati JMS poruku
-                    /*JMSPoruka poruka = new JMSPoruka(start + "", System.currentTimeMillis() + "", brojProcitanihPoruka, brojNwtisPoruka);
-                    jMSBean.sendJMSMessageToNWTiS_lurajcevi_2(poruka);*/
+                    System.out.println("b1" + brojProcitanihPoruka);
+                    System.out.println("b2" + brojNwtisPoruka);
+                    System.out.println("SALJEM JMS.");
+                    mailJMS = new MailJMS();
+                    mailJMS.sendJMSMessageToNWTiS_lurajcevi_1(new Date(start) + "","" + new Date(start + duration), brojProcitanihPoruka, brojNwtisPoruka);
                     brojProcitanihPoruka = 0;
                     brojNwtisPoruka = 0;
                     try {
@@ -141,8 +156,9 @@ public class ObradaPoruke extends Thread {
                 Logger.getLogger(ObradaPoruke.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
                 Logger.getLogger(ObradaPoruke.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (JMSException ex) {
+                Logger.getLogger(ObradaPoruke.class.getName()).log(Level.SEVERE, null, ex);
             } 
-            
         }
     }
 
@@ -158,6 +174,6 @@ public class ObradaPoruke extends Thread {
     private void printData(String data) {
         System.out.println(data);
     }
-    
 
+   
 }

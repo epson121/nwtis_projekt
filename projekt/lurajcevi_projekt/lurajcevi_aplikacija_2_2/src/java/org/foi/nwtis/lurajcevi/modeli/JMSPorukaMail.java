@@ -1,20 +1,20 @@
 
-package org.foi.nwtis.lurajcevi.mail;
+package org.foi.nwtis.lurajcevi.modeli;
 
 import java.io.Serializable;
 
 /**
- * @document JMSPoruka
+ * @document JMSPorukaMail
  * @author Luka Rajcevic
  */
-public class JMSPoruka implements Serializable {
+public class JMSPorukaMail implements Serializable {
     
     public String vrijemePocetka;
     public String vrijemeZavrsetka;
     public int brojProcitanihPoruka;
     public int brojNwtisPoruka;
 
-    public JMSPoruka(String vrijemePocetka, String vrijemeZavrsetka, int brojProcitanihPoruka, int brojNwtisPoruka) {
+    public JMSPorukaMail(String vrijemePocetka, String vrijemeZavrsetka, int brojProcitanihPoruka, int brojNwtisPoruka) {
         this.vrijemePocetka = vrijemePocetka;
         this.vrijemeZavrsetka = vrijemeZavrsetka;
         this.brojProcitanihPoruka = brojProcitanihPoruka;

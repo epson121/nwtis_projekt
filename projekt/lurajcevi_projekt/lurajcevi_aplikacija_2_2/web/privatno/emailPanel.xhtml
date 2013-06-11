@@ -45,6 +45,12 @@
                             <f:setPropertyActionListener target="#{pregledSvihPoruka.porukaID}" value="#{p.id}"/>
                         </h:commandButton>
                     </h:column>
+                    <h:column>
+                        <f:facet name="header">#{m.pregledSvihPoruka_brisanje}</f:facet>
+                        <h:commandButton value="#{m.pregledSvihPoruka_obrisi}" action="#{pregledSvihPoruka.obrisiPoruku()}">
+                            <f:setPropertyActionListener target="#{pregledSvihPoruka.porukaID}" value="#{p.id}"/>
+                        </h:commandButton>
+                    </h:column>
                 </h:dataTable>
             </h:form>
             <h:form>
