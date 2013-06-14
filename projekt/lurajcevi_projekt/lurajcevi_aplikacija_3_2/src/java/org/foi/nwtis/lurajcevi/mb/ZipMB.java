@@ -23,7 +23,7 @@ import org.foi.nwtis.lurajcevi.konfiguracije.NemaKonfiguracije;
 import org.foi.nwtis.lurajcevi.modeli.JMSPorukaZip;
 
 /**
- *
+ * Message driven bean, prima poruke iz Queue2
  * @author Luka Rajcevic
  */
 @MessageDriven(mappedName = "jms/NWTiS_lurajcevi_2", activationConfig = {
@@ -32,8 +32,7 @@ import org.foi.nwtis.lurajcevi.modeli.JMSPorukaZip;
 })
 public class ZipMB implements MessageListener {
     
-public ZipMB() {
-        RecordSerialization.deserializeJMSZip("");
+    public ZipMB() {
     }
     
     @Override

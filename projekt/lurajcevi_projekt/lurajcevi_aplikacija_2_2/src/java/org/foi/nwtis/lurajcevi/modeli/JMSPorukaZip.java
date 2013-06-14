@@ -10,7 +10,11 @@ import java.io.Serializable;
 public class JMSPorukaZip implements Serializable {
     
     private String zip;
-
+    
+    /**
+     * Struktura koja se šalje JMS porukom
+     * @param zip - zip kod
+     */
     public JMSPorukaZip(String zip) {
         this.zip = zip;
     }

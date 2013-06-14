@@ -23,12 +23,12 @@ import org.foi.nwtis.lurajcevi.modeli.JMSPorukaMail;
  * @author Luka Rajcevic
  */
 @Stateless
-public class MailJMS {
+public class MailJMS {/*
     @Resource(mappedName = "jms/NWTiS_lurajcevi_1")
     private Queue nWTiS_lurajcevi_1;
     @Resource(mappedName = "jms/NWTiS_QF_lurajcevi_1")
     private ConnectionFactory nWTiS_QF_lurajcevi_1;
-
+*/
     public void sendJMSMessageToNWTiS_lurajcevi_1(String v1, String v2, int n1, int n2 ) throws JMSException {
         Session session = null;
         Connection connection = null;

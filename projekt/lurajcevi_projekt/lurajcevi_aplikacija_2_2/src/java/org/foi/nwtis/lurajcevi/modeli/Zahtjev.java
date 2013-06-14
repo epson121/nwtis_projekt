@@ -11,7 +11,14 @@ public class Zahtjev {
     private String zahtjev;
     private String korisnik;
     private String datum;
-
+    
+    /**
+     * Struktura podataka za prikaz zahtjeva prema serveru
+     * @param id - broj zahtjeva
+     * @param zahtjev - sam zahtjev
+     * @param korisnik - korisnik koji ga je poslao
+     * @param datum  - vrijeme
+     */
     public Zahtjev(int id, String zahtjev, String korisnik, String datum) {
         this.id = id;
         this.zahtjev = zahtjev;

@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -86,9 +85,18 @@ public class Kontroler extends HttpServlet {
             try {
                 if (sesija.getAttribute("meteo_podaci") == null){
                     List<MeteoPodaci> podaci = DBConnector.dohvatiMeteoPodatke();
+                    SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy HH.mm.ss");
+                     
+                    for (MeteoPodaci mp : podaci){
+                        String d = df.format(df2.parse(mp.getDatum()));
+                        mp.setDatum(d);
+                    }
                     sesija.setAttribute("meteo_podaci", podaci);
                 }
             } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParseException ex) {
                 Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
             }
             odrediste = "/jsp/pregledMeteoPodataka.jsp";
@@ -99,7 +107,16 @@ public class Kontroler extends HttpServlet {
             List<ServerKomanda> pregled_zahtjeva = null;
             try {
                 pregled_zahtjeva = DBConnector.dohvatiPopisSocketServerKomandi("lurajcevi_dnevnik_servera", 0, "");
+                SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy HH.mm.ss");
+
+                for (ServerKomanda sk : pregled_zahtjeva){
+                    String d = df.format(df2.parse(sk.getDatum()));
+                    sk.setDatum(d);
+                }
             } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParseException ex) {
                 Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
             }
             sesija.setAttribute("dnevnik_socket_servera", pregled_zahtjeva);
@@ -112,7 +129,16 @@ public class Kontroler extends HttpServlet {
             List<ServerKomanda> pregled_zahtjeva = null;
             try {
                 pregled_zahtjeva = DBConnector.dohvatiPopisSocketServerKomandi("lurajcevi_dnevnik_servera", 1, status);
+                SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy HH.mm.ss");
+
+                for (ServerKomanda sk : pregled_zahtjeva){
+                    String d = df.format(df2.parse(sk.getDatum()));
+                    sk.setDatum(d);
+                }
             } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParseException ex) {
                 Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
             }
             sesija.setAttribute("dnevnik_socket_servera", pregled_zahtjeva);
@@ -152,6 +178,22 @@ public class Kontroler extends HttpServlet {
                     Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 sesija.setAttribute("meteo_podaci", podaci);
+             } else {
+                 try{
+                    List<MeteoPodaci> podaci = DBConnector.dohvatiMeteoPodatke();
+                    SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy HH.mm.ss");
+                     
+                    for (MeteoPodaci mp : podaci){
+                        String d = df.format(df2.parse(mp.getDatum()));
+                        mp.setDatum(d);
+                    }
+                    sesija.setAttribute("meteo_podaci", podaci);
+                 } catch (ParseException pe){
+                     pe.printStackTrace();
+                 } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+                }
              }
              odrediste = "/jsp/pregledMeteoPodataka.jsp";
         }

@@ -28,6 +28,12 @@ public class LurajceviKorisniciFacade extends AbstractFacade<LurajceviKorisnici>
         super(LurajceviKorisnici.class);
     }
     
+    /**
+     * Dodavanjenovog korisnika u bazu
+     * @param ime
+     * @param lozinka
+     * @throws NamingException 
+     */
     public void dodajKorisnika(String ime, String lozinka) throws NamingException{
         LurajceviKorisnici lk = new LurajceviKorisnici();
         lk.setIme(ime);
@@ -36,6 +42,11 @@ public class LurajceviKorisniciFacade extends AbstractFacade<LurajceviKorisnici>
         em.persist(lk);
     }
     
+    /**
+     * Provjera je li dani korisnik administrator
+     * @param ime
+     * @return 
+     */
     public boolean provjeriAdministratora(String ime){
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
@@ -49,6 +60,12 @@ public class LurajceviKorisniciFacade extends AbstractFacade<LurajceviKorisnici>
             return true;
     }
     
+    /**
+     * Provjera postoji li korisnik u bazi
+     * @param ime
+     * @param lozinka
+     * @return 
+     */
     public boolean provjeriKorisnika(String ime, String lozinka){
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
@@ -61,6 +78,11 @@ public class LurajceviKorisniciFacade extends AbstractFacade<LurajceviKorisnici>
             return true;
     }
     
+    /**
+     * Dohvaćanje podataka o korisnku prema imenu
+     * @param ime
+     * @return 
+     */
     public LurajceviKorisnici dajKorisnika(String ime){
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();

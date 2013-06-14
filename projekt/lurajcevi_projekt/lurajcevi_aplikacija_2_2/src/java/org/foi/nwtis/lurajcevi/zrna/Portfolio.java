@@ -40,7 +40,11 @@ public class Portfolio implements Serializable {
         context = FacesContext.getCurrentInstance();
         session = (HttpSession)(context.getExternalContext().getSession(true)); 
     }
-
+    
+    /**
+     * Dohvaća popis portfolio za korisnika
+     * @return 
+     */
     public List<LurajceviPortfolio> getPortfolioPopis() {
         String korisnik = (String) session.getAttribute("korisnik");
         portfolioPopis = lurajceviPortfolioFacade.dohvatiPortfolie(korisnik);
@@ -49,6 +53,10 @@ public class Portfolio implements Serializable {
         return portfolioPopis;
     }
     
+    /**
+     * postavlja varijable za pregled portfolia
+     * @return 
+     */
     public String pregledPortfolia(){
         PortfolioPregled.setMeteoPodaci(null);
         PortfolioPregled.setViewId(0);

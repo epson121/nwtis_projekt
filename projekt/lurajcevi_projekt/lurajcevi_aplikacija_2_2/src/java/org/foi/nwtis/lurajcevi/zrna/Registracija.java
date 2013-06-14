@@ -43,6 +43,11 @@ public class Registracija implements Serializable {
      * ******************************
      */
     
+    /**
+     * Provjera registracije
+     * @return
+     * @throws NamingException 
+     */
     public String registracija() throws NamingException{
         if (lurajceviKorisniciFacade.provjeriKorisnika(korisnickoIme, lozinka)){
             uspjesno = false;

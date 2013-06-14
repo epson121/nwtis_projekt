@@ -12,15 +12,12 @@ import javax.ejb.LocalBean;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.JMSException;
-import javax.jms.Message;
 import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
 import javax.jms.Queue;
 import javax.jms.Session;
-import javax.jms.TextMessage;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import org.foi.nwtis.lurajcevi.modeli.JMSPorukaMail;
 import org.foi.nwtis.lurajcevi.modeli.JMSPorukaZip;
 
 /**
@@ -29,12 +26,12 @@ import org.foi.nwtis.lurajcevi.modeli.JMSPorukaZip;
  */
 @Singleton
 @LocalBean
-public class ZipJMS {
+public class ZipJMS {/*
     @Resource(mappedName = "jms/NWTiS_lurajcevi_2")
     private Queue nWTiS_lurajcevi_2;
     @Resource(mappedName = "jms/NWTiS_QF_lurajcevi_2")
     private ConnectionFactory nWTiS_QF_lurajcevi_2;
-
+    * */
 
     public void sendJMSMessageToNWTiS_lurajcevi_2(String zip) throws JMSException {
         Connection connection = null;

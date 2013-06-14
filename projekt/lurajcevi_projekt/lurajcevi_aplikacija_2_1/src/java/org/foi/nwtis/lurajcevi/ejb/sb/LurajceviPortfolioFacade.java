@@ -35,6 +35,11 @@ public class LurajceviPortfolioFacade extends AbstractFacade<LurajceviPortfolio>
         super(LurajceviPortfolio.class);
     }
     
+    /**
+     * Dohvaćanje portflia od danog vlasnika
+     * @param vlasnik
+     * @return 
+     */
     public List<LurajceviPortfolio> dohvatiPortfolie(String vlasnik){
         LurajceviKorisnici lk = lurajceviKorisniciFacade.dajKorisnika(vlasnik);
         CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -45,6 +50,11 @@ public class LurajceviPortfolioFacade extends AbstractFacade<LurajceviPortfolio>
         return em.createQuery(cq).getResultList();
     }
     
+    /**
+     * Dohvaćanje portfolia prema id-u
+     * @param id
+     * @return 
+     */
     public LurajceviPortfolio dohvatiPortfolio(int id){
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
@@ -54,6 +64,13 @@ public class LurajceviPortfolioFacade extends AbstractFacade<LurajceviPortfolio>
         return (LurajceviPortfolio) em.createQuery(cq).getResultList().get(0);
     }
     
+    /**
+     * Dodavanje novog portfolia u bazu
+     * @param ime
+     * @param vlasnik
+     * @return
+     * @throws NamingException 
+     */
     public LurajceviPortfolio dodajPortfolio(String ime, String vlasnik) throws NamingException{
         LurajceviKorisnici lk = lurajceviKorisniciFacade.dajKorisnika(vlasnik);
         LurajceviPortfolio lp = new LurajceviPortfolio();
@@ -63,6 +80,12 @@ public class LurajceviPortfolioFacade extends AbstractFacade<LurajceviPortfolio>
         return lp;
     }
     
+    /**
+     * Dohvaćanje portfola prema nazivu portfolia
+     * (ime je malo čudno, al neda mi se mijenjat, bilo je nekog refactoringa)
+     * @param naziv
+     * @return 
+     */
     public LurajceviPortfolio dohvatiPortfolioPremaVlasnikuINazivu(String naziv){
         System.out.println("IME: " + naziv);
         CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -77,6 +100,10 @@ public class LurajceviPortfolioFacade extends AbstractFacade<LurajceviPortfolio>
             return null;
     }
     
+    /**
+     * TEST
+     * @return 
+     */
     public String test(){
         return "ASD2";
     }

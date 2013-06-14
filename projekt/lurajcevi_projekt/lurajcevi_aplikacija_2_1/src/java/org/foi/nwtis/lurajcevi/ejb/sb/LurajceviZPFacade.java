@@ -31,6 +31,12 @@ public class LurajceviZPFacade extends AbstractFacade<LurajceviZP> {
         super(LurajceviZP.class);
     }
     
+    /**
+     * Dodavanje novih podataka u ZP (zipovi-portfolio) tablicu
+     * @param lp
+     * @param zip
+     * @throws NamingException 
+     */
     public void dodajZP(LurajceviPortfolio lp, int zip) throws NamingException{
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
@@ -46,6 +52,11 @@ public class LurajceviZPFacade extends AbstractFacade<LurajceviZP> {
         
     }
     
+    /**
+     * Dohvaćanje podataka prema portfolio id-u
+     * @param lp
+     * @return 
+     */
     public List<LurajceviZP> dohvatiZP(LurajceviPortfolio lp){
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();

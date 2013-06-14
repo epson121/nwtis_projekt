@@ -39,7 +39,6 @@ public class ObradaPodatakaServer extends Thread{
             
             while (!SlusacAplikacije.isStopped()){
                 try{
-                    System.out.println("listening");
                     Socket client = server.accept();
                     System.out.println("--------------------------------------------");
                     System.out.println("Request has been received. Now responding...");
@@ -57,7 +56,7 @@ public class ObradaPodatakaServer extends Thread{
 
     @Override
     public void interrupt() {
-        super.interrupt(); //To change body of generated methods, choose Tools | Templates.
+        super.interrupt(); 
     }
     
     

@@ -216,11 +216,6 @@ public class ObradaPodatakaServerDretva extends Thread{
             Address[] toAddresses = InternetAddress.parse(to);
             message.setRecipients(Message.RecipientType.TO,toAddresses);
             message.setHeader("Message-ID", id);
-            /*
-             * s informacijama o komandi (vrijeme izvršavanja, trajanje prethodnog
-             * stanja, broj primljenih, neispravnih i izvršenih korisničkih komandi).
-             * 
-             */
             message.setHeader("Content-Type", "text/plain");
             message.setSentDate(new Date());
             message.setSubject(subject);

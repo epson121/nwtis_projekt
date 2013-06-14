@@ -25,6 +25,10 @@ public class SlusacAplikacije implements ServletContextListener {
     public static BP_Konfiguracija bpKonf;
     private ObradaPoruke op;
     
+    /**
+     * Inicijalizacija konteksta, pokretanje dretve
+     * @param sce 
+     */
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         
@@ -49,9 +53,14 @@ public class SlusacAplikacije implements ServletContextListener {
         op.start();
         
     }
-
+    
+    /**
+     * Prekidanje konteksta, zaustavljanje dretve
+     * @param sce 
+     */
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-   
+        if (op.isAlive())
+            op.interrupt();
     }
 }

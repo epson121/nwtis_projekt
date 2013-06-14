@@ -1,7 +1,6 @@
 
 package org.foi.nwtis.lurajcevi.modeli;
 
-import org.foi.nwtis.lurajcevi.ejb.jms.*;
 import java.io.Serializable;
 
 /**

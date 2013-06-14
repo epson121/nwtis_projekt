@@ -7,7 +7,6 @@ package org.foi.nwtis.lurajcevi.zrna;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -32,7 +31,6 @@ import org.foi.nwtis.lurajcevi.ejb.sb.LurajceviPortfolioFacade;
 import org.foi.nwtis.lurajcevi.ejb.sb.LurajceviZPFacade;
 import org.foi.nwtis.lurajcevi.ejb.sb.StatesFacade;
 import org.foi.nwtis.lurajcevi.ejb.sb.ZipCodesFacade;
-import org.foi.nwtis.lurajcevi.modeli.JMSPorukaZip;
 import org.foi.nwtis.lurajcevi.slusaci.SlusacAplikacije;
 import org.foi.nwtis.lurajcevi.ws.WSKlijent;
 

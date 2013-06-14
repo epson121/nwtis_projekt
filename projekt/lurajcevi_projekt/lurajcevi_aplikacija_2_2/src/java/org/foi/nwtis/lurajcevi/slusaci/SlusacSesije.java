@@ -17,12 +17,16 @@ import javax.servlet.http.HttpSessionBindingEvent;
  */
 @WebListener()
 public class SlusacSesije implements HttpSessionAttributeListener {
-
+    
+    /**
+     * Poziva se prilikom dodavanja atributa u sesiju
+     * Služi za praćenje svih aktivnih korisnika
+     * @param event 
+     */
     @Override
     public void attributeAdded(HttpSessionBindingEvent event) {
         if (event.getName().compareTo("korisnik") == 0){
             String user = (String) event.getValue();
-            System.out.println("Dodajem korisnika: " + user);
             List<String> aktivniKorisnici = (List<String>) event.getSession().getServletContext().getAttribute("aktivniKorisnici");
             if (aktivniKorisnici == null){
                 aktivniKorisnici = new ArrayList<String>();
@@ -31,12 +35,16 @@ public class SlusacSesije implements HttpSessionAttributeListener {
             event.getSession().getServletContext().setAttribute("aktivniKorisnici", aktivniKorisnici);
         }
     }
-
+    
+    /**
+     * Poziva se prilikom brisanja atributa iz sesije
+     * Sluzi za brisanje korisnika iz liste aktivnih
+     * @param event 
+     */
     @Override
     public void attributeRemoved(HttpSessionBindingEvent event) {
          if (event.getName().compareTo("korisnik") == 0){
             String korisnik = (String) event.getValue();
-            System.out.println("Brisem korisnika: " + korisnik);
             List<String> aktivniKorisnici = (List<String>) event.getSession().getServletContext().getAttribute("aktivniKorisnici");
             aktivniKorisnici.remove(korisnik);
             event.getSession().getServletContext().setAttribute("aktivniKorisnici", aktivniKorisnici);

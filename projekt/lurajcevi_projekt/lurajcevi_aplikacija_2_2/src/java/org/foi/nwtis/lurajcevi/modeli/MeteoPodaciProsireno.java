@@ -21,7 +21,21 @@ public class MeteoPodaciProsireno {
     private String tlak;
     private String datum;
     private String zracnaUdaljenost;
-
+    
+    /**
+     * Prošireni meteo podaci, meteorološki podaci + udaljenost
+     * @param zip_trazeni
+     * @param zip_vraceni
+     * @param temperatura
+     * @param vlaga
+     * @param geo_duzina
+     * @param geo_sirina
+     * @param grad
+     * @param vjetar
+     * @param tlak
+     * @param datum
+     * @param zracnaUdaljenost 
+     */
     public MeteoPodaciProsireno(String zip_trazeni, String zip_vraceni, String temperatura, String vlaga, String geo_duzina, String geo_sirina, String grad, String vjetar, String tlak, String datum, String zracnaUdaljenost) {
         this.zip_trazeni = zip_trazeni;
         this.zip_vraceni = zip_vraceni;

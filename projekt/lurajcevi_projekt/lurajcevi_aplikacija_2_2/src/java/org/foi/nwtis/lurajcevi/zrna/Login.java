@@ -85,6 +85,10 @@ public class Login implements Serializable {
         }
     }
     
+    /**
+     * Odjava korisnika
+     * @return 
+     */
     public String odjava(){
         if (session.getAttribute("korisnik") != null)
             session.removeAttribute("korisnik");

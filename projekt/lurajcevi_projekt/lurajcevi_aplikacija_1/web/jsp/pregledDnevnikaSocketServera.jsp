@@ -17,7 +17,6 @@
     </head>
     <body>
         <h1>Pregled dnevnika socket servera!</h1>
-         Filtriraj zipove:
         <form method="POST" action="${pageContext.servletContext.contextPath}/PregledDnevnikaSocketServeraFilter">
             Filtriraj prema statusu:
             <input name="status"/>

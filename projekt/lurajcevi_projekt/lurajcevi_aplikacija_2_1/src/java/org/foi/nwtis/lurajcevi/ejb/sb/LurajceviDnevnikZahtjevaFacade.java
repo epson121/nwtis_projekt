@@ -38,7 +38,7 @@ public class LurajceviDnevnikZahtjevaFacade extends AbstractFacade<LurajceviDnev
     }
     
     /**
-     *
+     * Dohvaća sve zahtjeve
      * @return
      */
     public List<LurajceviDnevnikZahtjeva> dohvatiZahtjeve(){
@@ -49,7 +49,13 @@ public class LurajceviDnevnikZahtjevaFacade extends AbstractFacade<LurajceviDnev
         return em.createQuery(cq).getResultList();
     }
     
-     public List<LurajceviDnevnikZahtjeva> dohvatiZahtjeveFiltrirano(Date d1, Date d2){
+    /**
+     * Dohvaća zahtjeve filtrirane prema datumu
+     * @param d1 - prvi datum
+     * @param d2 - drugi datum
+     * @return 
+     */
+    public List<LurajceviDnevnikZahtjeva> dohvatiZahtjeveFiltrirano(Date d1, Date d2){
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
         Root<LurajceviDnevnikZahtjeva> podaci = cq.from(LurajceviDnevnikZahtjeva.class);
@@ -58,6 +64,11 @@ public class LurajceviDnevnikZahtjevaFacade extends AbstractFacade<LurajceviDnev
         return em.createQuery(cq).getResultList();
     }
      
+    /**
+     * Dohvaća zahtjeve filtrirano po korisniku
+     * @param korisnik
+     * @return 
+     */
     public List<LurajceviDnevnikZahtjeva> dohvatiFiltriranoPoKorisniku(String korisnik){
        CriteriaBuilder cb = em.getCriteriaBuilder();
        CriteriaQuery cq = cb.createQuery();

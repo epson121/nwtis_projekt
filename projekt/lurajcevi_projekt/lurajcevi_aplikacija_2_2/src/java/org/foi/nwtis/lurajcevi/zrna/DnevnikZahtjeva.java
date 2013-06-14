@@ -37,12 +37,19 @@ public class DnevnikZahtjeva implements Serializable {
     private String datum2;
     private String korisnik;
     
+    /**
+     * Konstruktor, resetira pregled
+     */
     public DnevnikZahtjeva() {
         viewId = 0;
         pocetak = 0;
         stranicenje = 3;
     }
     
+    /**
+     * Prikazuje podatke s prethodne stranice
+     * @return 
+     */
     public String prethodnaStranica(){
         if (pocetak - stranicenje <= 0){
             pocetak = 0;
@@ -52,6 +59,10 @@ public class DnevnikZahtjeva implements Serializable {
         return "";
     }
     
+    /**
+     * Pokazuje podtke za slijedeću stranicu
+     * @return 
+     */
     public String slijedecaStranica(){
         if (popisZahtjeva != null){
             if (pocetak + stranicenje < popisZahtjeva.size()){
@@ -61,6 +72,9 @@ public class DnevnikZahtjeva implements Serializable {
         return "";
     }
     
+    /**
+     * Dohvaća filtrirane podatke
+     */
     public String dohvatiPodatkeFiltrirano(){
         popisZahtjeva = null;
         viewId = 1;
@@ -69,6 +83,10 @@ public class DnevnikZahtjeva implements Serializable {
         return "";
     }
     
+    /**
+     * Dohvaća podatke filtrirane po korisniku
+     * @return 
+     */
     public String dohvatiPremaKorisniku(){
         popisZahtjeva = null;
         viewId = 2;
@@ -77,7 +95,12 @@ public class DnevnikZahtjeva implements Serializable {
         return "";
     }
 
-    public List<Zahtjev> getPopisZahtjeva() throws ParseException {
+    /**
+     * Getter za popis zahtjeva
+     * Ovisno i viewId mijenjaju se podaci koji se prikazuju
+     * @return
+     */
+    public List<Zahtjev> getPopisZahtjeva() {
         if (popisZahtjeva != null){
             int korak = pocetak + stranicenje;
             if (korak > popisZahtjeva.size())
@@ -94,14 +117,17 @@ public class DnevnikZahtjeva implements Serializable {
         } else if (viewId == 1) {
             SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy HH.mm.ss");
-            String dat1 = df2.format(df.parse(datum1));
-            String dat2 = df2.format(df.parse(datum2));
-            Date d1 = df2.parse(df2.format(df.parse(datum1)));
-            Date d2 = df2.parse(df2.format(df.parse(datum2)));
-            ldz = lurajceviDnevnikZahtjevaFacade.dohvatiZahtjeveFiltrirano(d1, d2);
-            for (LurajceviDnevnikZahtjeva l : ldz){
-                Zahtjev z = new Zahtjev(l.getId(), l.getZahtjev(), l.getKorisnik(), l.getVrijeme() + "");
-                popisZahtjeva.add(z);
+            try{
+                Date d1 = df2.parse(df2.format(df.parse(datum1)));
+                Date d2 = df2.parse(df2.format(df.parse(datum2)));
+                ldz = lurajceviDnevnikZahtjevaFacade.dohvatiZahtjeveFiltrirano(d1, d2);
+
+                for (LurajceviDnevnikZahtjeva l : ldz){
+                    Zahtjev z = new Zahtjev(l.getId(), l.getZahtjev(), l.getKorisnik(), l.getVrijeme() + "");
+                    popisZahtjeva.add(z);
+                }
+            } catch (ParseException pe){
+                
             }
         } else {
             ldz = lurajceviDnevnikZahtjevaFacade.dohvatiFiltriranoPoKorisniku(korisnik);

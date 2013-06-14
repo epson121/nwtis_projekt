@@ -43,10 +43,14 @@ public class ObradaPoruke extends Thread {
     private int brojProcitanihPoruka = 0;
     private int brojNwtisPoruka = 0;
     private int interval;
-
+    
     public ObradaPoruke() {
     }
-
+    
+    /**
+     * Konstruktor
+     * @param config  - referenca na datoteku konfiguracije
+     */
     public ObradaPoruke(Konfiguracija config) {
         this.config = config;
         emailPosluzitelj = config.dajPostavku("emailPosluzitelj");
@@ -63,7 +67,11 @@ public class ObradaPoruke extends Thread {
     public synchronized void start() {
         super.start();
     }
-
+    
+    /**
+     * Run metoda dretve koja u pravilnom intervalu provjerava e mail sandučić,
+     * sortira poruke, šalje JMS poruku..
+     */
     @Override
     public void run() {
         Session session = null;
@@ -128,8 +136,6 @@ public class ObradaPoruke extends Thread {
                         }
                     }  
                     duration = System.currentTimeMillis() - start;
-                    System.out.println("b1" + brojProcitanihPoruka);
-                    System.out.println("b2" + brojNwtisPoruka);
                     System.out.println("SALJEM JMS.");
                     mailJMS = new MailJMS();
                     mailJMS.sendJMSMessageToNWTiS_lurajcevi_1(new Date(start) + "","" + new Date(start + duration), brojProcitanihPoruka, brojNwtisPoruka);

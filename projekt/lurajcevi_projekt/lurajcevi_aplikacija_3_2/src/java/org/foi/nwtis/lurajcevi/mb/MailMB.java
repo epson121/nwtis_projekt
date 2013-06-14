@@ -16,7 +16,7 @@ import org.foi.nwtis.lurajcevi.RecordSerialization;
 import org.foi.nwtis.lurajcevi.modeli.JMSPorukaMail;
 
 /**
- *
+ * Message driven bean, dohvaća poruke iz Queue 1
  * @author Luka Rajcevic
  */
 @MessageDriven(mappedName = "jms/NWTiS_lurajcevi_1", activationConfig = {
@@ -25,7 +25,6 @@ import org.foi.nwtis.lurajcevi.modeli.JMSPorukaMail;
 })
 public class MailMB implements MessageListener {
      public MailMB() {
-        RecordSerialization.deserializeJMSMail("");
     }
     
     @Override

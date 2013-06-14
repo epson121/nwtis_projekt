@@ -26,14 +26,22 @@ public class FilterZahtjeva implements Filter{
     public void init(FilterConfig filterConfig) throws ServletException {
         
     }
-
+    
+    /**
+     * Filter zahtjeva 
+     * Sprema podatke u dnevnik zahtjeva
+     * @param request
+     * @param response
+     * @param chain
+     * @throws IOException
+     * @throws ServletException 
+     */
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
          if (request instanceof HttpServletRequest){
                 HttpServletRequest req = (HttpServletRequest) request;
                 HttpSession sesija = ((HttpServletRequest)request).getSession();
                 String zahtjev = ((HttpServletRequest) request).getRequestURI();
-                //TODO dodati u bazu
                 Object korisnik = sesija.getAttribute("korisnik");                
                 if (korisnik == null){
                     HttpServletResponse res = (HttpServletResponse) response;

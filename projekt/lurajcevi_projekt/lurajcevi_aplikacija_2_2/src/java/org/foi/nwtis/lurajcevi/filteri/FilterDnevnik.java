@@ -34,7 +34,14 @@ public class FilterDnevnik implements Filter {
     public void init(FilterConfig filterConfig) throws ServletException {
         
     }
-
+   /**
+    * Filter zahtjeva
+    * @param request
+    * @param response
+    * @param chain
+    * @throws IOException
+    * @throws ServletException 
+    */
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
          if (request instanceof HttpServletRequest){
