@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Rest podaci</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:panelGrid columns="3" >
+                <h:panelGrid columns="1" >
+                    <h:selectOneListbox id="aktivniKorisnici" value="#{podaciRest.korisnikOdabrano}" size="7">
+                        <f:selectItems value="#{podaciRest.korisnici}" />
+                    </h:selectOneListbox>
+                    <h:commandButton value="Dohvati portfolie" action="#{podaciRest.dohvatiPopisPortfolia()}" />
+                </h:panelGrid>
+                
+                <h:panelGrid columns="1" >
+                    <h:selectOneListbox id="popisPortfolia" value="#{podaciRest.portfolioOdabrano}" size="7">
+                        <f:selectItems value="#{podaciRest.portfolio}" />
+                    </h:selectOneListbox>
+                    <h:commandButton value="Dohvati Zipove" action="#{podaciRest.dohvatiZipove()}" />
+                </h:panelGrid>
+                
+                 <h:panelGrid columns="1" >
+                     <h:selectOneListbox id="popisZipova" value="#{podaciRest.zipOdabrano}" size="7">
+                         <f:selectItems value="#{podaciRest.zipovi}" />
+                    </h:selectOneListbox>
+                     <h:commandButton value="Dohvati meteo podatke" action="#{podaciRest.dohvatiMeteoPodatke()}" />
+                </h:panelGrid>
+            </h:panelGrid>
+            <h:outputText value="#{podaciRest.podaci}" />
+        </h:form>
+    </h:body>
+</html>
+

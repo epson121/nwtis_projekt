@@ -23,7 +23,6 @@ import org.foi.nwtis.lurajcevi.konfiguracije.KonfiguracijaApstraktna;
 import org.foi.nwtis.lurajcevi.konfiguracije.NemaKonfiguracije;
 import org.foi.nwtis.lurajcevi.modeli.JMSPorukaZip;
 import org.foi.nwtis.lurajcevi.slusaci.SlusacAplikacije;
-import static org.foi.nwtis.lurajcevi.slusaci.SlusacAplikacije.path;
 
 /**
  * Message driven bean, prima poruke iz Queue2
@@ -55,7 +54,7 @@ public class ZipMB implements MessageListener {
         }
     }
     
-    public String sendRequest(String request){
+    public static String sendRequest(String request){
         StringBuilder response = new StringBuilder();
         try {
             InputStream is = null;

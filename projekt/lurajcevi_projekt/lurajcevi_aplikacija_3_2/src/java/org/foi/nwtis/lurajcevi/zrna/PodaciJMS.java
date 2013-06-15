@@ -43,6 +43,16 @@ public class PodaciJMS implements Serializable {
         }
         return "";
     }
+    
+    public String obrisiSveZip(){
+        RecordSerialization.recordZip.clear();
+        return "";
+    }
+    
+    public String obrisiSveMail(){
+        RecordSerialization.recordMail.clear();
+        return "";
+    }
 
     public List<JMSPorukaMail> getPodaciMail() {
         podaciMail = RecordSerialization.recordMail;

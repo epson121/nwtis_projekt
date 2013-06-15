@@ -81,9 +81,9 @@ public class PortfolioResourceContainer {
         HttpSession session = req.getSession(true);
         String s = "";
         if (session == null)
-            return "PRAZNO1";
+            return "PRAZNO";
         if (session.getServletContext().getAttribute("aktivniKorisnici") == null){
-            return "PRAZNO2";
+            return "PRAZNO";
         } else{
             aktivniKorisnici = (List<String>) session.getServletContext().getAttribute("aktivniKorisnici");
             for (Iterator<String> it = aktivniKorisnici.iterator(); it.hasNext();) {

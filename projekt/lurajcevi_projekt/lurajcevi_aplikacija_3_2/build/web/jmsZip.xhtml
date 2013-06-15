@@ -10,6 +10,7 @@
     <h:body>
         JMS Email poruke<br/>
         <h:form>
+            <h:commandButton value="Obriši sve" action="#{podaciJMS.obrisiSveZip()}" />
             <h:dataTable value="#{podaciJMS.podaciZip}" var="p" 
                              class="tablica" headerClass="zaglavlje"
                              rowClasses="neparni,parni"
