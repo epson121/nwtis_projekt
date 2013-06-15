@@ -2,6 +2,7 @@
 package org.foi.nwtis.lurajcevi.mail;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -138,7 +139,11 @@ public class ObradaPoruke extends Thread {
                     duration = System.currentTimeMillis() - start;
                     System.out.println("SALJEM JMS.");
                     mailJMS = new MailJMS();
-                    mailJMS.sendJMSMessageToNWTiS_lurajcevi_1(new Date(start) + "","" + new Date(start + duration), brojProcitanihPoruka, brojNwtisPoruka);
+                    SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy HH.mm.ss");
+                    mailJMS.sendJMSMessageToNWTiS_lurajcevi_1(df.format(new Date(start)),
+                                                              df.format(new Date(start + duration)),
+                                                              brojProcitanihPoruka,
+                                                              brojNwtisPoruka);
                     brojProcitanihPoruka = 0;
                     brojNwtisPoruka = 0;
                     try {
@@ -170,7 +175,7 @@ public class ObradaPoruke extends Thread {
 
     @Override
     public void interrupt() {
-        super.interrupt(); //To change body of generated methods, choose Tools | Templates.
+        super.interrupt(); 
     }
     
     /**

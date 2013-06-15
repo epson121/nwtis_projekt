@@ -256,6 +256,7 @@ public class PortfolioKreiranje implements Serializable {
             lurajceviZPFacade.dodajZP(lp, Integer.parseInt(zip));
             if (!aktivniZipKodovi.contains(zip)){
                 try {
+                    System.out.println("SALJEM JMS za zip: " + zip);
                     zipJMS.sendJMSMessageToNWTiS_lurajcevi_2(zip);
                 } catch (JMSException ex) {
                     Logger.getLogger(PortfolioKreiranje.class.getName()).log(Level.SEVERE, null, ex);

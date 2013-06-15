@@ -10,7 +10,6 @@
     
     <application>
         <locale-config>
-            <default-locale>en</default-locale>
             <supported-locale>en</supported-locale>
             <supported-locale>hr</supported-locale>
         </locale-config>
@@ -117,6 +116,16 @@
         <navigation-case>
             <from-action>#{pregledSvihPoruka.pregledPoruke}</from-action>
             <from-outcome>ERROR</from-outcome>
+            <to-view-id>/privatno/emailPanel.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/privatno/pregledPoruke.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{pregledPoruke.povratakPregledSvihPoruka}</from-action>
+            <from-outcome>OK</from-outcome>
             <to-view-id>/privatno/emailPanel.xhtml</to-view-id>
             <redirect/>
         </navigation-case>

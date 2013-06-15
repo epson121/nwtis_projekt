@@ -1,6 +1,7 @@
 
 package org.foi.nwtis.lurajcevi;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -12,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.foi.nwtis.lurajcevi.modeli.JMSPorukaMail;
 import org.foi.nwtis.lurajcevi.modeli.JMSPorukaZip;
+import org.foi.nwtis.lurajcevi.slusaci.SlusacAplikacije;
 
 /**
  * @document RecordSerialization
@@ -34,7 +36,7 @@ public class RecordSerialization {
         ObjectOutputStream objectOutputStream = null;
         
         try {
-            fileOutputStream = new FileOutputStream(filename);
+            fileOutputStream = new FileOutputStream(SlusacAplikacije.path + File.separator + filename);
             objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(list);
         } catch (IOException ex) {
@@ -52,6 +54,7 @@ public class RecordSerialization {
             }
         }
         System.out.println("Serialized.");
+        System.out.println(SlusacAplikacije.path + File.separator + filename);
     }
     
         /**
@@ -63,12 +66,11 @@ public class RecordSerialization {
         ObjectOutputStream objectOutputStream = null;
         
         try {
-            fileOutputStream = new FileOutputStream(filename);
+            fileOutputStream = new FileOutputStream(SlusacAplikacije.path + File.separator + filename);
             objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(list);
         } catch (IOException ex) {
             System.out.println("Failed to serialize.");
-            return;
         }
         finally{
             try {
@@ -90,7 +92,7 @@ public class RecordSerialization {
         FileInputStream fileInputStream = null;
         ObjectInputStream in = null;
         try {
-            fileInputStream = new FileInputStream(filename);
+            fileInputStream = new FileInputStream(SlusacAplikacije.path + File.separator + filename);
             in = new ObjectInputStream(fileInputStream);
             records =  (List<JMSPorukaMail>) in.readObject();
         } catch (IOException ex){
@@ -114,6 +116,7 @@ public class RecordSerialization {
         else{
             System.out.println("File is empty.");
         }
+        System.out.println(SlusacAplikacije.path + File.separator + filename);
     }
     
      /**
@@ -125,7 +128,7 @@ public class RecordSerialization {
         FileInputStream fileInputStream = null;
         ObjectInputStream in = null;
         try {
-            fileInputStream = new FileInputStream(filename);
+            fileInputStream = new FileInputStream(SlusacAplikacije.path + File.separator + filename);
             in = new ObjectInputStream(fileInputStream);
             records =  (List<JMSPorukaZip>) in.readObject();
         } catch (IOException ex){

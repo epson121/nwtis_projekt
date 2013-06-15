@@ -60,7 +60,7 @@ public class Kontroler extends HttpServlet {
             HttpSession sesija = null;
             if (korIme == null || korIme.trim().length() == 0 || lozinka == null 
                 || lozinka.trim().length() == 0){
-                throw new NeuspjesnaPrijava("Nije uneseno korisnicko ime ili lozinka.");
+                odrediste = "/PrijavaKorisnika";
             } 
             else {
                 boolean b = false;
@@ -73,8 +73,8 @@ public class Kontroler extends HttpServlet {
                     sesija = request.getSession();
                     sesija.setAttribute("korisnik", korIme);
                 }
-            }
                 odrediste = "/Kontroler";
+            }
         } 
         
         else if (zahtjev.equals("/PregledMeteoPodataka")){

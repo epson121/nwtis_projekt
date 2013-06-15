@@ -27,11 +27,11 @@ public class SlusacAplikacije implements ServletContextListener {
     public static BP_Konfiguracija bpKonf = null;
     public static boolean stopped = false;
     public static boolean paused = false;
-    
+    public static String path = "";
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         
-        String path = sce.getServletContext().getRealPath("WEB-INF");
+        path = sce.getServletContext().getRealPath("WEB-INF");
         String configFile = sce.getServletContext().getInitParameter("konfiguracija");
         String bpConfigFile = sce.getServletContext().getInitParameter("BPkonfiguracija");
         bpKonf = new BP_Konfiguracija(path + File.separator + bpConfigFile);
@@ -47,6 +47,8 @@ public class SlusacAplikacije implements ServletContextListener {
         
         System.out.println("Konfiguracija baze učitana.");
         System.out.println("Konfiguracija učitana.");
+        System.out.println("Config file mail: " + config.dajPostavku("serijalizacija_datoteka_mail"));
+        System.out.println("Config file zip: " + config.dajPostavku("serijalizacija_datoteka_zip"));
         
         RecordSerialization.deserializeJMSMail(config.dajPostavku("serijalizacija_datoteka_mail"));
         RecordSerialization.deserializeJMSZip(config.dajPostavku("serijalizacija_datoteka_zip"));

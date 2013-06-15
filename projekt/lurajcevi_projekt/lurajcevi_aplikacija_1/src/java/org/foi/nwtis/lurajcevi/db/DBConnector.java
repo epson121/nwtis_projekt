@@ -391,17 +391,20 @@ public class DBConnector {
             veza = DriverManager.getConnection(url, korisnik, lozinka);
             instr = veza.createStatement();
             rs = instr.executeQuery("SELECT * FROM " + baza + " WHERE zip_trazeni = '" + zip + "' ORDER BY id DESC LIMIT 1");
-            rs.next();
-            p = new MeteoPodaci(rs.getString("zip_trazeni"),
-                                                rs.getString("zip_vraceni"),
-                                                rs.getString("temperatura"),
-                                                rs.getString("vlaga"),
-                                                rs.getString("geo_duzina"),
-                                                rs.getString("geo_sirina"),
-                                                rs.getString("grad"),
-                                                rs.getString("vjetar"),
-                                                rs.getString("tlak"),
-                                                rs.getString("datum"));
+            if (!rs.next())
+                return null;
+            else{
+                p = new MeteoPodaci(rs.getString("zip_trazeni"),
+                                    rs.getString("zip_vraceni"),
+                                    rs.getString("temperatura"),
+                                    rs.getString("vlaga"),
+                                    rs.getString("geo_duzina"),
+                                    rs.getString("geo_sirina"),
+                                    rs.getString("grad"),
+                                    rs.getString("vjetar"),
+                                    rs.getString("tlak"),
+                                    rs.getString("datum"));
+            }
         } catch(SQLException e){
             if (veza != null){
                 veza = null;

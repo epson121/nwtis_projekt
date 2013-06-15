@@ -4,6 +4,7 @@
  */
 package org.foi.nwtis.lurajcevi.mb;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -21,6 +22,8 @@ import org.foi.nwtis.lurajcevi.RecordSerialization;
 import org.foi.nwtis.lurajcevi.konfiguracije.KonfiguracijaApstraktna;
 import org.foi.nwtis.lurajcevi.konfiguracije.NemaKonfiguracije;
 import org.foi.nwtis.lurajcevi.modeli.JMSPorukaZip;
+import org.foi.nwtis.lurajcevi.slusaci.SlusacAplikacije;
+import static org.foi.nwtis.lurajcevi.slusaci.SlusacAplikacije.path;
 
 /**
  * Message driven bean, prima poruke iz Queue2
@@ -42,10 +45,10 @@ public class ZipMB implements MessageListener {
             JMSPorukaZip jmz = (JMSPorukaZip) objMsg.getObject();
             RecordSerialization.recordZip.add(jmz);
             String zip = jmz.getZip();
-            if (zip.length() < 5)
-                return;
-            if (sendRequest("USER admin; PASSWD admin; TEST ZIP " + zip).equals("OK 44")){
-                sendRequest("USER admin; PASSWD admin; ADD ZIP " + zip);
+            System.out.println("Dosao je JMS za zip: " + jmz.getZip());
+            String s = sendRequest("USER admin; PASSWD admin; TEST ZIP " + zip + ";");
+            if (s.trim().equals("OK 44")){
+                sendRequest("USER admin; PASSWD admin; ADD ZIP " + zip + ";");
             }
         } catch (JMSException ex) {
             Logger.getLogger(MailMB.class.getName()).log(Level.SEVERE, null, ex);
@@ -59,16 +62,14 @@ public class ZipMB implements MessageListener {
             OutputStream os = null;
             Socket server = null;
             int character;
-            
-            String serverIP = KonfiguracijaApstraktna.preuzmiKonfiguraciju("lurajcevi_projekt_config.xml").dajPostavku("server_ip");
-            int port = Integer.parseInt(KonfiguracijaApstraktna.preuzmiKonfiguraciju("lurajcevi_projekt_config.xml").dajPostavku("port"));
+            System.out.println("REQ: " + request);
+            String serverIP = KonfiguracijaApstraktna.preuzmiKonfiguraciju(SlusacAplikacije.path + File.separator + "lurajcevi_projekt_config.xml").dajPostavku("server_ip");
+            int port = Integer.parseInt(KonfiguracijaApstraktna.preuzmiKonfiguraciju(SlusacAplikacije.path + File.separator + "lurajcevi_projekt_config.xml").dajPostavku("port"));
                 try{
                     server = new Socket(serverIP, port);
                     os = server.getOutputStream();
                     is = server.getInputStream();
-                    Scanner s = new Scanner(System.in);
-                    String command = s.nextLine();
-                    os.write(command.getBytes());
+                    os.write(request.getBytes());
                     os.flush();
                     server.shutdownOutput();
                     
@@ -95,6 +96,8 @@ public class ZipMB implements MessageListener {
         } catch (NemaKonfiguracije ex) {
             ex.printStackTrace();
         }
+        System.out.println("REQUEST: " + request);
+        System.out.println("RESPONSE: " + response);
         return response.toString();
     }
     

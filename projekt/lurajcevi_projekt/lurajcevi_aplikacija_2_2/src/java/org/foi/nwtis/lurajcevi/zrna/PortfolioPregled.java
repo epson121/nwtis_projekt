@@ -164,6 +164,8 @@ public class PortfolioPregled implements Serializable {
         }
         for (ZipCodes zc : zcl){
             if (viewId == 0){
+                SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy HH.mm.ss");
+                SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 mp = WSKlijent.dohvatiPodatkeOZipKodu(zc.getZip() + "");
                 if (mp == null){
                     mpp =  new MeteoPodaciProsireno(zc.getZip() + "",
@@ -189,7 +191,7 @@ public class PortfolioPregled implements Serializable {
                                                        mp.getGrad(),
                                                        mp.getVjetar(),
                                                        mp.getTlak(),
-                                                       mp.getDatum(),
+                                                       df.format(df2.parse(mp.getDatum())),
                                                        udaljenost
                                                       );
                 meteoPodaci.add(mpp);
@@ -221,7 +223,7 @@ public class PortfolioPregled implements Serializable {
                                                            mp2.getGrad(),
                                                            mp2.getVjetar(),
                                                            mp2.getTlak(),
-                                                           mp2.getDatum(),
+                                                           df.format(df2.parse(mp2.getDatum())),
                                                            udaljenost
                                                           );
                     meteoPodaci.add(mpp);

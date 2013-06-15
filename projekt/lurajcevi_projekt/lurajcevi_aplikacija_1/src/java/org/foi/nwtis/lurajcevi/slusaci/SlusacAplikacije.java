@@ -22,8 +22,8 @@ public class SlusacAplikacije implements ServletContextListener {
     
     public static Konfiguracija config = null;
     public static BP_Konfiguracija bpKonf = null;
-    public static boolean stopped = false;
-    public static boolean paused = false;
+    public volatile static boolean stopped = false;
+    public volatile static boolean paused = false;
     private ObradaPodatakaWeatherbug opw = null;
     private ObradaPodatakaServer ops = null;
     

@@ -37,6 +37,9 @@ public class DnevnikZahtjeva implements Serializable {
     private String datum2;
     private String korisnik;
     
+    SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy HH.mm.ss");
+    
     /**
      * Konstruktor, resetira pregled
      */
@@ -111,28 +114,28 @@ public class DnevnikZahtjeva implements Serializable {
         if (viewId == 0){
             ldz = lurajceviDnevnikZahtjevaFacade.dohvatiZahtjeve();
             for (LurajceviDnevnikZahtjeva l : ldz){
-                Zahtjev z = new Zahtjev(l.getId(), l.getZahtjev(), l.getKorisnik(), l.getVrijeme() + "");
+                Zahtjev z = new Zahtjev(l.getId(), l.getZahtjev(), l.getKorisnik(), df.format(l.getVrijeme()) + "");
                 popisZahtjeva.add(z);
             }
         } else if (viewId == 1) {
-            SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy HH.mm.ss");
+            
             try{
                 Date d1 = df2.parse(df2.format(df.parse(datum1)));
                 Date d2 = df2.parse(df2.format(df.parse(datum2)));
                 ldz = lurajceviDnevnikZahtjevaFacade.dohvatiZahtjeveFiltrirano(d1, d2);
 
                 for (LurajceviDnevnikZahtjeva l : ldz){
-                    Zahtjev z = new Zahtjev(l.getId(), l.getZahtjev(), l.getKorisnik(), l.getVrijeme() + "");
+                    Zahtjev z = new Zahtjev(l.getId(), l.getZahtjev(), l.getKorisnik(), df.format(l.getVrijeme()) + "");
                     popisZahtjeva.add(z);
                 }
             } catch (ParseException pe){
                 
             }
-        } else {
+        } else if (viewId == 2) {
+            System.out.println("KORISNIK: " + korisnik);
             ldz = lurajceviDnevnikZahtjevaFacade.dohvatiFiltriranoPoKorisniku(korisnik);
             for (LurajceviDnevnikZahtjeva l : ldz){
-                Zahtjev z = new Zahtjev(l.getId(), l.getZahtjev(), l.getKorisnik(), l.getVrijeme() + "");
+                Zahtjev z = new Zahtjev(l.getId(), l.getZahtjev(), l.getKorisnik(), df.format(l.getVrijeme()) + "");
                 popisZahtjeva.add(z);
             }
         }

@@ -7,6 +7,7 @@
             <title>#{m.pregledSvihPoruka_naslov}</title>
             <h:outputStylesheet library="css" name="osnovna.css" />
         </h:head>
+    <f:view locale="#{lokalizacija.odabraniLocale}">
         <h:body>
             <h:form>
                 <h:selectOneListbox value="#{pregledSvihPoruka.odabranaMapa}">
@@ -60,5 +61,6 @@
             <br/>
             <h:link value="#{m.pregledSvihPoruka_povratak}" outcome="/privatno/portfolio" />
         </h:body>
+    </f:view>
 </html>
 

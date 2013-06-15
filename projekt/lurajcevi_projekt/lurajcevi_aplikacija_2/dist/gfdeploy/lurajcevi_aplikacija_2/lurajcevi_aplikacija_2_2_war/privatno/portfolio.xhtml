@@ -7,38 +7,40 @@
         <title>#{m.portfolio_naslov}</title>
         <h:outputStylesheet library="css" name="osnovna.css" />
     </h:head>
-    <h:body>
-        #{m.portfolio_naslov}
-        <br/><br/>
-        <h:link value="#{m.portfolio_kreiraj}" outcome="/privatno/kreirajPortfolio" /><br/>
-        <h:link value="#{m.portfolio_dnevnikZahtjeva}" outcome="/privatno/dnevnikZahtjeva" /><br/>
-        <h:link value="#{m.portfolio_pregledMailPoruka}" outcome="/privatno/emailPanel" /><br/>
-        <h:link value="#{m.error_portal}" outcome="/faces/portal" />
-        <br/><br/>
-        <h:form >
-            <h:dataTable value="#{portfolio.portfolioPopis}" var="p" 
-                         class="tablica" headerClass="zaglavlje"
-                         rowClasses="neparni,parni">
-                <h:column>
-                    <f:facet name="header">#{m.portfolio_id}</f:facet>
-                    <h:outputText value="#{p.id}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">#{m.portfolio_vlasnik}</f:facet>
-                    <h:outputText value="#{p.vlasnik.ime}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">#{m.portfolio_naziv}</f:facet>
-                    <h:outputText value="#{p.naziv}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">#{m.portfolio_pogledaj}</f:facet>
-                    <h:commandButton value="#{m.portfolio_pogledaj}" action="#{portfolio.pregledPortfolia()}">
-                        <f:setPropertyActionListener target="#{portfolioPregled.portfolioId}" value="#{p.id}"/>
-                    </h:commandButton>
-                </h:column>
-            </h:dataTable>
-        </h:form>
-    </h:body>
+    <f:view locale="#{lokalizacija.odabraniLocale}">
+        <h:body>
+            #{m.portfolio_naslov}
+            <br/><br/>
+            <h:link value="#{m.portfolio_kreiraj}" outcome="/privatno/kreirajPortfolio" /><br/>
+            <h:link value="#{m.portfolio_dnevnikZahtjeva}" outcome="/privatno/dnevnikZahtjeva" /><br/>
+            <h:link value="#{m.portfolio_pregledMailPoruka}" outcome="/privatno/emailPanel" /><br/>
+            <h:link value="#{m.error_portal}" outcome="/faces/portal" />
+            <br/><br/>
+            <h:form >
+                <h:dataTable value="#{portfolio.portfolioPopis}" var="p" 
+                             class="tablica" headerClass="zaglavlje"
+                             rowClasses="neparni,parni">
+                    <h:column>
+                        <f:facet name="header">#{m.portfolio_id}</f:facet>
+                        <h:outputText value="#{p.id}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">#{m.portfolio_vlasnik}</f:facet>
+                        <h:outputText value="#{p.vlasnik.ime}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">#{m.portfolio_naziv}</f:facet>
+                        <h:outputText value="#{p.naziv}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">#{m.portfolio_pogledaj}</f:facet>
+                        <h:commandButton value="#{m.portfolio_pogledaj}" action="#{portfolio.pregledPortfolia()}">
+                            <f:setPropertyActionListener target="#{portfolioPregled.portfolioId}" value="#{p.id}"/>
+                        </h:commandButton>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </h:body>
+    </f:view>
 </html>
 
