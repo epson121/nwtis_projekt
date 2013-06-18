@@ -6,6 +6,7 @@ package org.foi.nwtis.lurajcevi.zrna;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -55,6 +56,8 @@ public class PregledSvihPoruka implements Serializable {
     private boolean next = false, prev = false;
     private boolean praznaMapa = true;
     
+    private SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy HH.mm.ss");
     
     /*******************************
      * KONSTRUKTOR
@@ -127,6 +130,43 @@ public class PregledSvihPoruka implements Serializable {
             
         }
         return "";
+    }
+    
+     /**
+     * Pomocna metoda, sluzi za brisanje poruka iz svih mapa
+     * Ne koristi se u zadaci, ali je bila korisna prilikom testiranja i debugiranja
+     */
+    public void obrisiSvePoruke(){
+        
+        Session session;
+        Store store;
+        Folder folder;
+        Message[] messages;
+        List<String> folders = new ArrayList<String>();
+        folders.add(odabranaMapa);
+        for (String f : folders){
+            try{
+                session = Session.getDefaultInstance(System.getProperties(), null);
+                store = session.getStore("imap");
+                store.connect(emailPosluzitelj, korisnickoIme, lozinka);
+                folder = store.getDefaultFolder();
+                folder = folder.getFolder(f);
+                
+                folder.open(Folder.READ_WRITE);
+                messages = folder.getMessages();
+                System.out.println("FOLDER " + f + " DELETED.");
+                System.out.println("mess count: " + messages.length);
+                for (int messageNumber = 0; messageNumber < messages.length; messageNumber++) {
+                    messages[messageNumber].setFlag(Flags.Flag.DELETED, true);
+                }
+                folder.close(true);
+                store.close();
+            } catch (NoSuchProviderException ex) {
+                Logger.getLogger(PregledSvihPoruka.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (MessagingException ex) {
+                Logger.getLogger(PregledSvihPoruka.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
     
     /**
@@ -263,8 +303,10 @@ public class PregledSvihPoruka implements Serializable {
                      popisPoruka.add(poruka);
                 }
             }
-            folder.close(true);
-            store.close();
+            if (folder.isOpen())
+                folder.close(true);
+            if (store.isConnected())
+                store.close();
         } catch (AuthenticationFailedException e) {
             e.printStackTrace();
         } catch (FolderClosedException e) {

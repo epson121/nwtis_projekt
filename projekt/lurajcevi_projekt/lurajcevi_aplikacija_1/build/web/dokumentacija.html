@@ -1,0 +1,57 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dokumentacija</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <h2>Projektna dokumentacija</h2>
+        <h3>Applikacijski tok: </h3>
+        <div>
+            <img src="doc/app_flow.png" alt="application flow" style="border: 1px black solid;" />
+            <div style="width: 70%; font-family: monospace; color: black;">
+                OPIS:<br/>
+                Sustav se sastoji od 3 neovisne aplikacije koje međusobno komuniciraju preko 
+                web servisima (WS i REST), email porukama (James server) te JMS porukama. 
+                <br/><br/>
+                <b>Aplikacija 1:</b><br/>
+                Sastoji se od baze podataka <i>nwtis_lurajcevi_bp_1</i> čiji ER model je prikazan kasnije.
+                Pokreće dvije dretve (jednu za weatherbug web servis, a drugu za socket server.<br/>
+                U bazi podataka se nalaze aktivni zip kodovi. To su kodovi za koje se prikupljaju meteorološki
+                podaci. Popis aktivnih zip kodova se može mijenjati slanjem komandi Socket serveru. <br/>
+                Aplikacija je također zadužena i za hosting web servisa koji komunicira s bazom podataka
+                te vraća meteorološke podatke (najnovije, filtrirane, najnovijih n itd.). Aplikacija ima
+                i svoj korisnički dio zaštićen SSL-om u kojemu se mogu pregledavati prikupljeni meteorološki
+                podaci, zahtjevi prema Socket serveru i zahtjevi prema HTTP serveru.<br/>
+                <b>Aplikacija 2:</b><br/>
+                Pokreće dretvu koja u pravilnim intervalima dohvaća email poruke s James servera. Poruke
+                se sortiraju u mape postavljene u konfiguraciji. Također, aplikacija koristi Web servis 
+                koji je hostan u aplikaciji 1 kako bi mogla prikazati meteorološke podatke za korisničke
+                portfolie. Postoje 2 uloge korisnika - administratorska i korisnička. Administrator ima 
+                mogućnost pregledavanja email poruka i pregledavanja zahtjeva prema HTTP serveru, dok 
+                korisnik samo može pregledavati i kreirati vlastite portfolie.<br/>
+                Aplikacija također hosta REST servis koji na bazi putanje prikazuje popis aktivnih korisnika,
+                njihovih portfolia te zip kodova u svakom portfoliu.<br/>
+                I ova aplikacija ima svoju bazu podataka <i>nwtis_lurajcevi_bp_2</i><br/>
+                <b>Aplikacija 3:</b><br/>
+                Aplikacija 3 nema vlastitu bazu podataka. Ona komunicira s ostale dvije aplikacije preko JMS poruka.
+                Postoje 2 tipa JMS poruka koje ona prima, te za svaku poruku ima drugu akciju. Aplikacija vrši evidenciju 
+                poruka te ih serijalizira po gašenju aplikacije.<br/>
+                Aplikacija također koristi REST servis iz aplikacije 2, te ga proširuje prikazujući uz sve podatke
+                iz 2. aplikacije i trenutne meteorološke podatke za odabrani zip kod.
+            </div>
+        </div>
+        <h3> ER modeli: </h3>
+        <div>
+            <i>nwtis_lurajcevi_bp_1 ER model:</i> <br/>
+            <img src="doc/ER_1.png" alt="ER1" style="border: 1px black solid;"/>
+            <br/><br/>
+            <i>nwtis_lurajcevi_bp_2 ER model:</i> <br/>
+            <img src="doc/ER_2.png" alt="ER2" style="border: 1px black solid;"/>
+        </div>
+    </body>
+</html>

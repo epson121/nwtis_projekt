@@ -24,6 +24,12 @@ import org.foi.nwtis.lurajcevi.modeli.Zahtjev;
 @Named(value = "dnevnikZahtjeva")
 @SessionScoped
 public class DnevnikZahtjeva implements Serializable {
+    
+    /*******************************
+     * VARIJABLE
+     * ****************************
+     */
+    
     @EJB
     private LurajceviDnevnikZahtjevaFacade lurajceviDnevnikZahtjevaFacade;
 
@@ -40,6 +46,11 @@ public class DnevnikZahtjeva implements Serializable {
     SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy HH.mm.ss");
     
+    /*******************************
+     * KONSTRUKTOR
+     * ****************************
+     */
+    
     /**
      * Konstruktor, resetira pregled
      */
@@ -48,6 +59,11 @@ public class DnevnikZahtjeva implements Serializable {
         pocetak = 0;
         stranicenje = 3;
     }
+    
+     /********************************
+     * POMOĆNE METODE
+     * ******************************
+     */
     
     /**
      * Prikazuje podatke s prethodne stranice
@@ -98,6 +114,11 @@ public class DnevnikZahtjeva implements Serializable {
         return "";
     }
 
+    /********************************
+     * GETTERI I SETTERI
+     * ******************************
+     */
+    
     /**
      * Getter za popis zahtjeva
      * Ovisno i viewId mijenjaju se podaci koji se prikazuju
@@ -128,6 +149,8 @@ public class DnevnikZahtjeva implements Serializable {
                     Zahtjev z = new Zahtjev(l.getId(), l.getZahtjev(), l.getKorisnik(), df.format(l.getVrijeme()) + "");
                     popisZahtjeva.add(z);
                 }
+                datum1 = "";
+                datum2 = "";
             } catch (ParseException pe){
                 
             }

@@ -28,6 +28,12 @@ import org.foi.nwtis.lurajcevi.ws.WSKlijent;
 @Named(value = "portfolioPregled")
 @SessionScoped
 public class PortfolioPregled implements Serializable {
+    
+     /*******************************
+     * VARIJABLE
+     * ****************************
+     */
+    
     @EJB
     private LurajceviZPFacade lurajceviZPFacade;
     @EJB
@@ -49,12 +55,31 @@ public class PortfolioPregled implements Serializable {
     private String datum1;
     private String datum2;
     
+    /*******************************
+     * KONSTRUKTOR
+     * ****************************
+     */
+    
     /**
      * Creates a new instance of PortfolioPregled
      */
     public PortfolioPregled() {
+
     }
     
+    /********************************
+     * POMOĆNE METODE
+     * ******************************
+     */
+    
+    /**
+     * Računa udaljenost između dvije geografske točke
+     * @param lat1 - širina1
+     * @param lng1 - širina2
+     * @param lat2 - dužina1
+     * @param lng2 - dužina2
+     * @return udaljenost u metrima
+     */
     public String udaljenostGeoKoordinata(double lat1, double lng1, double lat2, double lng2){
         double earthRadius = 3958.75;
         double dLat = Math.toRadians(lat2-lat1);
@@ -98,6 +123,10 @@ public class PortfolioPregled implements Serializable {
         return "";
     }
     
+    /**
+     * Dohvaća podatke filtrirano
+     * @return ""
+     */
     public String dohvatiPodatkeFiltrirano(){
         viewId = 1;
         setChanged(true);
@@ -106,7 +135,12 @@ public class PortfolioPregled implements Serializable {
         return "";
     }
     
-
+    /********************************
+     * GETTERI I SETTERI
+     * ******************************
+     */
+    
+    
     public String getPortfolioId() {
         return portfolioId;
     }
@@ -230,6 +264,8 @@ public class PortfolioPregled implements Serializable {
                 }
             }
         }
+        datum1 = "";
+        datum2 = "";
         int korak = pocetak + stranicenje;
         if (korak > meteoPodaci.size())
             korak = meteoPodaci.size();

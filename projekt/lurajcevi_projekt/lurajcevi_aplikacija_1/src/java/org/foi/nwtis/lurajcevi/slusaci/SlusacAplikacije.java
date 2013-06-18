@@ -26,6 +26,7 @@ public class SlusacAplikacije implements ServletContextListener {
     public volatile static boolean paused = false;
     private ObradaPodatakaWeatherbug opw = null;
     private ObradaPodatakaServer ops = null;
+    public static String wb_key = "";
     
     @Override
     public void contextInitialized(ServletContextEvent sce) {
@@ -34,7 +35,7 @@ public class SlusacAplikacije implements ServletContextListener {
         String configFile = sce.getServletContext().getInitParameter("konfiguracija");
         String bpConfigFile = sce.getServletContext().getInitParameter("BPkonfiguracija");
         bpKonf = new BP_Konfiguracija(path + File.separator + bpConfigFile);
-        
+
         try {
             config = KonfiguracijaApstraktna.preuzmiKonfiguraciju(path + File.separator + configFile);
         } catch (NemaKonfiguracije ex) {
@@ -43,6 +44,7 @@ public class SlusacAplikacije implements ServletContextListener {
         
         sce.getServletContext().setAttribute("BP_Konfiguracija", bpKonf);
         sce.getServletContext().setAttribute("Konfiguracija", config);
+        wb_key = config.dajPostavku("wb_key");
         
         System.out.println("Konfiguracija baze učitana.");
         System.out.println("Konfiguracija učitana.");

@@ -10,6 +10,7 @@
     <h:body>
         JMS Email poruke<br/>
         <h:form>
+            <h:commandButton value="Obriši sve" action="#{podaciJMS.obrisiSveMail()}" />
             <h:dataTable value="#{podaciJMS.podaciMail}" var="p" 
                              class="tablica" headerClass="zaglavlje"
                              rowClasses="neparni,parni"
@@ -37,7 +38,7 @@
             </h:column>
             </h:dataTable>
         </h:form>
-        <h:link value="Pregled zip JMS poruka" outcome="index" /><br/>
+        <h:link value="Početna" outcome="index" /><br/>
     </h:body>
 </html>
 

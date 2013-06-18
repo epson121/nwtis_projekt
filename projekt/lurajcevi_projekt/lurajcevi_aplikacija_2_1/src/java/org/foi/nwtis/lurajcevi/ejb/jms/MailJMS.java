@@ -1,12 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.foi.nwtis.lurajcevi.ejb.jms;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
@@ -23,12 +19,8 @@ import org.foi.nwtis.lurajcevi.modeli.JMSPorukaMail;
  * @author Luka Rajcevic
  */
 @Stateless
-public class MailJMS {/*
-    @Resource(mappedName = "jms/NWTiS_lurajcevi_1")
-    private Queue nWTiS_lurajcevi_1;
-    @Resource(mappedName = "jms/NWTiS_QF_lurajcevi_1")
-    private ConnectionFactory nWTiS_QF_lurajcevi_1;
-*/
+public class MailJMS {
+    
     public void sendJMSMessageToNWTiS_lurajcevi_1(String v1, String v2, int n1, int n2 ) throws JMSException {
         Session session = null;
         Connection connection = null;

@@ -16,15 +16,18 @@
                              rowClasses="neparni,parni"
                              style="width:200px;text-align: center;">
             <h:column>
-                <f:facet name="header">Vrijeme pocetka</f:facet>
+                <f:facet name="header">Zip kod</f:facet>
                 <h:outputText value="#{p.zip}"/>
             </h:column> 
+            <h:column>
+                <h:commandButton value="Obriši poruku" action="#{podaciJMS.obrisiZip()}" >
+                    <f:setPropertyActionListener target="#{podaciJMS.odabraniZip}" value="#{p}"/>
+                </h:commandButton>
+            </h:column>
             </h:dataTable>
-            <h:commandButton value="Obriši poruku" action="#{podaciJMS.obrisiZip()}" >
-                <f:setPropertyActionListener target="#{podaciJMS.odabraniZip}" value="#{p}"/>
-            </h:commandButton>
+            
         </h:form>
-        <h:link value="Pregled zip JMS poruka" outcome="index" /><br/>
+        <h:link value="Početna" outcome="index" /><br/>
     </h:body>
 </html>
 

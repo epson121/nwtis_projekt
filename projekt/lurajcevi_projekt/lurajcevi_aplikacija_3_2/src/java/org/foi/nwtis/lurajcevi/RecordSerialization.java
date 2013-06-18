@@ -57,7 +57,7 @@ public class RecordSerialization {
         System.out.println(SlusacAplikacije.path + File.separator + filename);
     }
     
-        /**
+    /**
      * Serializes List<Record> to a file
      * @param filename  - writes serialized data to this file
      */

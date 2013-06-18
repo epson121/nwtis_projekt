@@ -72,8 +72,11 @@ public class Kontroler extends HttpServlet {
                 if (b){
                     sesija = request.getSession();
                     sesija.setAttribute("korisnik", korIme);
+                    odrediste = "/Kontroler";
+                } else{
+                    odrediste = "/PrijavaKorisnika";
                 }
-                odrediste = "/Kontroler";
+                
             }
         } 
         
@@ -165,24 +168,31 @@ public class Kontroler extends HttpServlet {
         }  
         
         else if (zahtjev.equals("/MeteoPodaciZipFilter")){
-            //TODO u jsp. formatirati datume
+            
             HttpSession sesija = request.getSession();
             String zip = request.getParameter("zip");
+            SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy HH.mm.ss");
              if (zip != null && !zip.trim().equals("")){
                 List<MeteoPodaci> podaci = null;
                 try {
                     podaci = DBConnector.dohvatiNajnovijePodatke("lurajcevi_podaci_zip", zip, 0, 1);
+                    for (MeteoPodaci mp : podaci){
+                        String d = df.format(df2.parse(mp.getDatum()));
+                        mp.setDatum(d);
+                    }
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (SQLException ex) {
+                    Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ParseException ex) {
                     Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 sesija.setAttribute("meteo_podaci", podaci);
              } else {
                  try{
                     List<MeteoPodaci> podaci = DBConnector.dohvatiMeteoPodatke();
-                    SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                    SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy HH.mm.ss");
+                    
                      
                     for (MeteoPodaci mp : podaci){
                         String d = df.format(df2.parse(mp.getDatum()));
@@ -212,7 +222,13 @@ public class Kontroler extends HttpServlet {
                     String dat1 = df2.format(df.parse(datum1));
                     String dat2 = df2.format(df.parse(datum2));
                     List<MeteoPodaci> podaci = DBConnector.dohvatiPodatkeInterval("lurajcevi_podaci_zip", zip, dat1, dat2);
+                     
+                    for (MeteoPodaci mp : podaci){
+                        String d = df.format(df2.parse(mp.getDatum()));
+                        mp.setDatum(d);
+                    }
                     sesija.setAttribute("meteo_podaci", podaci);
+                    
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (SQLException ex) {

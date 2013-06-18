@@ -27,7 +27,12 @@ import org.foi.nwtis.lurajcevi.konfiguracije.Konfiguracija;
  */
 @Stateless
 public class ObradaPoruke extends Thread {
-
+    
+    /*******************************
+     * VARIJABLE
+     * ****************************
+     */
+    
     @EJB
     private MailJMS mailJMS;
 
@@ -47,6 +52,11 @@ public class ObradaPoruke extends Thread {
     
     public ObradaPoruke() {
     }
+    
+     /*******************************
+     * KONSTRUKTOR
+     * ****************************
+     */
     
     /**
      * Konstruktor
@@ -105,8 +115,8 @@ public class ObradaPoruke extends Thread {
                         
                         message = messages[messageNumber];
                         messagecontentObject = message.getContent();
-                        
-                        if (message.getSubject().startsWith(trazeniPredmet)){
+                        System.out.println("SUBJECT: " + message.getSubject());
+                        if (message.getSubject().equals(trazeniPredmet)){
                             System.out.println("Trazena poruka.");
                             contentType = message.getContentType();
                             

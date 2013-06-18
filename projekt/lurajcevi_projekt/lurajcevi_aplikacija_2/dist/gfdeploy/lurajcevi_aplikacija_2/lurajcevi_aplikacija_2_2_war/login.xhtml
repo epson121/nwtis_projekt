@@ -14,7 +14,7 @@
                 <h:inputText  id ="eime" value="#{login.korisnickoIme}" validator="#{login.provjeriPrazno}"/> 
                 <h:message for="eime" style="color:red; font-weight: bold;" /><br/>
                 <h:outputText value="#{m.login_lozinka}" /><br/>
-                <h:inputText id="elozinka"   value="#{login.lozinka}" validator="#{login.provjeriPrazno}"/>
+                <h:inputSecret id="elozinka"   value="#{login.lozinka}" validator="#{login.provjeriPrazno}"/>
                 <h:message for="elozinka" style="color:red; font-weight: bold;" /><br/>
                 <h:commandButton value="#{m.login_prijava}" action="#{login.prijava()}"/>
                 <br/><br/>

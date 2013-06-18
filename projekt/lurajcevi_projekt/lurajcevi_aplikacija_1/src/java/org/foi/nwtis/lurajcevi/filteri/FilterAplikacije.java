@@ -40,7 +40,7 @@ public class FilterAplikacije implements Filter {
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("FilterAplikacije:DoBeforeProcessing");
+            //log("FilterAplikacije:DoBeforeProcessing");
         }
         start = System.currentTimeMillis();
     }    
@@ -48,7 +48,7 @@ public class FilterAplikacije implements Filter {
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("FilterAplikacije:DoAfterProcessing");
+            //log("FilterAplikacije:DoAfterProcessing");
         }
         String zahtjev = ((HttpServletRequest) request).getServletPath();
         String korisnik = "anonymous";
@@ -76,7 +76,7 @@ public class FilterAplikacije implements Filter {
             throws IOException, ServletException {
         
         if (debug) {
-            log("FilterAplikacije:doFilter()");
+            //log("FilterAplikacije:doFilter()");
         }
         
         doBeforeProcessing(request, response);
@@ -147,7 +147,7 @@ public class FilterAplikacije implements Filter {
         this.filterConfig = filterConfig;
         if (filterConfig != null) {
             if (debug) {                
-                log("FilterAplikacije:Initializing filter");
+                //log("FilterAplikacije:Initializing filter");
             }
         }
     }

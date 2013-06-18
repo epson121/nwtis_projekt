@@ -25,8 +25,6 @@ import org.foi.nwtis.lurajcevi.konfiguracije.bp.BP_Konfiguracija;
 public class SlusacAplikacije implements ServletContextListener {
    public static Konfiguracija config = null;
     public static BP_Konfiguracija bpKonf = null;
-    public static boolean stopped = false;
-    public static boolean paused = false;
     public static String path = "";
     @Override
     public void contextInitialized(ServletContextEvent sce) {

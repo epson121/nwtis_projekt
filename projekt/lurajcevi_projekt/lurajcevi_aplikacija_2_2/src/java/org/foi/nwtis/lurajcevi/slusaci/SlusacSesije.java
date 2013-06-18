@@ -53,6 +53,6 @@ public class SlusacSesije implements HttpSessionAttributeListener {
 
     @Override
     public void attributeReplaced(HttpSessionBindingEvent event) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 }

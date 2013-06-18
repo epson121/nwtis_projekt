@@ -58,7 +58,6 @@ public class PortfolioResourceContainer {
     @GET
     @Produces("text/html")
     public String getHtml() {
-        //TODO return proper representation object
         throw new UnsupportedOperationException();
     }
 

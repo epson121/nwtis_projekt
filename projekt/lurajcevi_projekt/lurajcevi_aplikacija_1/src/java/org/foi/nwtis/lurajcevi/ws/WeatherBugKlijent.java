@@ -3,6 +3,7 @@ package org.foi.nwtis.lurajcevi.ws;
 
 import net.wxbug.api.LiveWeatherData;
 import net.wxbug.api.UnitType;
+import org.foi.nwtis.lurajcevi.slusaci.SlusacAplikacije;
 
 /**
  * @document WeatherBugKlijent
@@ -10,8 +11,8 @@ import net.wxbug.api.UnitType;
  */
 public class WeatherBugKlijent {
     
-    //TODO from web.xml
-    String wb_code = "A5537364377";
+    
+    String wb_code = SlusacAplikacije.wb_key;
     
     public LiveWeatherData dajMeteoPodatke(String zip){
         return getLiveWeatherByUSZipCode(zip, UnitType.METRIC, wb_code);

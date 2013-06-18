@@ -14,7 +14,7 @@
                 <h:inputText  id ="eime" value="#{registracija.korisnickoIme}" validator="#{registracija.provjeriPrazno}"/> 
                 <h:message for="eime" style="color:red; font-weight: bold;" /><br/>
                 <h:outputText value="#{m.registracija_lozinka}" /><br/>
-                <h:inputText id="elozinka"   value="#{registracija.lozinka}" validator="#{registracija.provjeriPrazno}"/>
+                <h:inputSecret id="elozinka"   value="#{registracija.lozinka}" validator="#{registracija.provjeriPrazno}"/>
                 <h:message for="elozinka" style="color:red; font-weight: bold;" /><br/>
                 <h:commandButton value="#{m.registracija_prijava}" action="#{registracija.registracija()}"/>
                 <br/><br/>

@@ -353,9 +353,7 @@ public class DBConnector {
             instr = veza.createStatement();
             rs = instr.executeQuery("SELECT * FROM " + baza + " WHERE zip_trazeni = '" + zip + "'");
             rs.next();
-            //TEMP nn.nn VLAGA nn.nn TLAK nnnn.nn GEOSIR {-
-            //}nnn.nnnnnn GEODUZ {-}nnn.nnnnnn
-            //TODO oblikovati prema formatu
+
             String temp = new DecimalFormat("##.##").format(rs.getDouble("temperatura"));
             String vlaga = new DecimalFormat("##.##").format(rs.getDouble("vlaga"));
             String tlak = new DecimalFormat("####.##").format(rs.getDouble("tlak"));

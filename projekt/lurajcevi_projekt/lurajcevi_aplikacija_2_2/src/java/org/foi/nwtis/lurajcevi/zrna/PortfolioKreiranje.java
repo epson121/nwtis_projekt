@@ -41,6 +41,12 @@ import org.foi.nwtis.lurajcevi.ws.WSKlijent;
 @Named(value = "portfolioKreiranje")
 @SessionScoped
 public class PortfolioKreiranje implements Serializable {
+    
+    /*******************************
+     * VARIJABLE
+     * ****************************
+     */
+    
     @EJB
     private ZipJMS zipJMS;
     @EJB
@@ -232,6 +238,12 @@ public class PortfolioKreiranje implements Serializable {
         }
     }
     
+    /**
+     * Sprema portfolio u bazu. Provjerava sve elemente i ako su prisutni, 
+     * redirecta na portfolio
+     * @return "OK"
+     * @throws NamingException 
+     */
     public String spremiPortfolio() throws NamingException{
         String korisnik = (String) session.getAttribute("korisnik");
         FacesContext c = FacesContext.getCurrentInstance();
@@ -263,7 +275,24 @@ public class PortfolioKreiranje implements Serializable {
                 }
             }
         }
+        nullify();
         return "OK";
+    }
+    
+    /**
+     * Postavlja vrijednosti varijabli na null
+     */
+    public void nullify(){
+        popisDrzavaOdabrano = null;
+        odabraneDrzave = null;
+        odabraneDrzaveOdabrano = null;
+        popisGradova = null;
+        odabraniGradovi = null;
+        odabraniGradoviOdabrano = null;
+        popisZipKodova = null;
+        odabraniZipKodoviOdabrano = null;
+        odabraniZipKodovi = null;
+        nazivPortfolia = "";
     }
     
    

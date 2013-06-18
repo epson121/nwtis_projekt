@@ -37,7 +37,7 @@
                     <h:column>
                         <f:facet name="header">#{m.pregledSvihPoruka_vrijeme}</f:facet>
                         <h:outputText value="#{p.vrijeme}">
-                            <f:convertDateTime pattern="dd.MM.yyyy hh:mm:ss"/>
+                            <f:convertDateTime timeZone="GMT+2" pattern="dd.MM.yyyy HH:mm:ss "/>
                         </h:outputText>
                     </h:column>
                     <h:column>
@@ -56,7 +56,8 @@
             </h:form>
             <h:form>
                 <h:commandButton rendered="#{pregledSvihPoruka.prev}" value="#{m.pregledSvihPoruka_prethodnaStranica}" action="#{pregledSvihPoruka.prethodnaStranica}" />
-                <h:commandButton rendered="#{pregledSvihPoruka.next}" value="#{m.pregledSvihPoruka_slijedecaStranica}" action="#{pregledSvihPoruka.slijedecaStranica}" />
+                <h:commandButton rendered="#{pregledSvihPoruka.next}" value="#{m.pregledSvihPoruka_slijedecaStranica}" action="#{pregledSvihPoruka.slijedecaStranica}" /> <br/><br/>
+                <h:commandButton value="#{m.pregledSvihPoruka_obisiSve}" action="#{pregledSvihPoruka.obrisiSvePoruke()}" />
             </h:form>
             <br/>
             <h:link value="#{m.pregledSvihPoruka_povratak}" outcome="/privatno/portfolio" />
